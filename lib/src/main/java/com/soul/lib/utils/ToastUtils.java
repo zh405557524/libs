@@ -2,8 +2,9 @@ package com.soul.lib.utils;
 
 import android.os.Handler;
 import android.os.Looper;
-import android.support.annotation.StringRes;
 import android.widget.Toast;
+
+import androidx.annotation.StringRes;
 
 /**
  * <pre>

@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.HandlerThread;
 
 import com.soul.lib.utils.AppUtil;
+import com.soul.lib.utils.UIUtils;
 
 
 public class AppInstanceBase {
@@ -25,7 +26,7 @@ public class AppInstanceBase {
         mContext = app.getApplicationContext();
         Global.setContext(mContext);
         initial();
-        //        UIUtils.init(app, mUiHandler, android.os.Process.myTid());
+        UIUtils.init(app, mUiHandler, android.os.Process.myTid());
     }
 
     public Context getContext() {

@@ -150,7 +150,7 @@ public class AppUtil {
                 String cpuSubsystem;
                 String cpuaccctSubsystem;
                 for (int i = 0; i < lines.length; i++) {
-//                    LogUtil.e("PKG", lines[i]);
+                    //                    LogUtil.e("PKG", lines[i]);
                 }
                 if (lines.length == 2) {//有的手机里cgroup包含2行或者3行，我们取cpu和cpuacct两行数据
                     cpuSubsystem = lines[0];
@@ -259,7 +259,6 @@ public class AppUtil {
         }
         return false;
     }
-
 
 
     private AppUtil() {

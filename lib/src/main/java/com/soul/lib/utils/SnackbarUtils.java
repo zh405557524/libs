@@ -1,14 +1,16 @@
 package com.soul.lib.utils;
 
-import android.support.annotation.ColorInt;
-import android.support.design.widget.BaseTransientBottomBar;
-import android.support.design.widget.Snackbar;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
+
 import java.lang.ref.WeakReference;
+
+import androidx.annotation.ColorInt;
 
 /**
  * <pre>

@@ -1,2 +1,5 @@
 <manifest package="com.soul.lib"
-    xmlns:android="http://schemas.android.com/apk/res/android" />
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+</manifest>
