@@ -1,2 +1,2 @@
-include ':app', ':lib'
+include ':app', ':lib', ':frame'
 rootProject.name='libs'

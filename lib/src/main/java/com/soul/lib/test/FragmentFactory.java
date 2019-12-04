@@ -76,7 +76,12 @@ public class FragmentFactory {
         if (fragment != null) {
             return fragment;
         }
-        return null;
+        switch (name) {
+            case TEXT_VIEW_CLASSIFY:
+                fragment = new TextFragment();
+                break;
+        }
+        return fragment;
     }
 
 
