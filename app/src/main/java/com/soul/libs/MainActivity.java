@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 final Intent intent = new Intent(MainActivity.this, TestActivity.class);
                 intent.putExtra("pageName", "com.soul.libs.lib");
                 startActivity(intent);
+
             }
             break;
             case R.id.tv_frame: {
