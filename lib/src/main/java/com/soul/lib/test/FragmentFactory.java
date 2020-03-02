@@ -66,6 +66,8 @@ public class FragmentFactory {
                 e.printStackTrace();
             } catch (InvocationTargetException e) {
                 e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
         return classNameNew;

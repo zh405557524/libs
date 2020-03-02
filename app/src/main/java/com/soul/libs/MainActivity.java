@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         findViewById(R.id.tv_lib).setOnClickListener(this);
         findViewById(R.id.tv_frame).setOnClickListener(this);
+        findViewById(R.id.tv_jni).setOnClickListener(this);
     }
 
     @Override
@@ -30,6 +31,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.tv_frame: {
                 final Intent intent = new Intent(MainActivity.this, TestActivity.class);
                 intent.putExtra("pageName", "com.soul.libs.frame");
+                startActivity(intent);
+            }
+            break;
+            case R.id.tv_jni: {
+                final Intent intent = new Intent(MainActivity.this, TestActivity.class);
+                intent.putExtra("pageName", "com.soul.libs.jni");
                 startActivity(intent);
             }
             break;
