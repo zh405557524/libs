@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+
             case R.id.tv_lib: {
                 final Intent intent = new Intent(MainActivity.this, TestActivity.class);
                 intent.putExtra("pageName", "com.soul.libs.lib");
