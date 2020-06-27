@@ -3,8 +3,8 @@ package com.soul.libs.jni;
 import android.util.Log;
 import android.view.View;
 
-import com.soul.lib.jni.JniTest;
 import com.soul.lib.test.ButtonTextFragment;
+import com.soul.nativelibrary.JniTest;
 
 /**
  * Description: jni 测试类
@@ -49,7 +49,7 @@ public class JniTestFragment extends ButtonTextFragment implements View.OnClickL
                 test.setDataSize(100);
                 byte[] bytes = {'1', '2', '3', '4'};
                 test.setByteData(bytes);
-                JniTest.sendCallJavaTest(test);
+//                JniTest.sendCallJavaTest(test);
                 Log.i("Tag", "native 设置 后的数值 data:" + test.getData() + " dataSize:" + test.getDataSize());
                 break;
         }

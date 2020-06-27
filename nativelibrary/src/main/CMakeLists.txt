@@ -24,11 +24,11 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/libs/${CMAKE_ANDROID_ARCH
 LINK_DIRECTORIES(${CMAKE_SOURCE_DIR}/jni/thirdparty/cutils/lib/)
 
 
-add_library( cutils
+add_library(cutils
         SHARED
         IMPORTED)
 
-set_target_properties( cutils
+set_target_properties(cutils
         PROPERTIES IMPORTED_LOCATION
         ${CMAKE_SOURCE_DIR}/./jni/thirdparty/cutils/lib/libcutils.so)
 
@@ -38,4 +38,6 @@ add_library(Lib SHARED
         ${glob_source_files})
 
 #链接第三方库以及系统库(该命令需要放置在add_XXX之后，否则会报错)
-target_link_libraries(Lib cutils -llog -lz)
+target_link_libraries(Lib cutils -llog -lz
+        -utils
+        )

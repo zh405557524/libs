@@ -1,4 +1,4 @@
-package com.soul.lib.jni;
+package com.soul.nativelibrary;
 
 /**
  * Description:

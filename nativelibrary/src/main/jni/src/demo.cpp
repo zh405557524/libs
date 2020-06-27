@@ -117,6 +117,8 @@ Java_com_soul_lib_jni_JniTest_startUPDServer_1c(JNIEnv* env, jclass clazz) {
     server.init();
 
     udp();
+    return NULL;
+
 }
 
 

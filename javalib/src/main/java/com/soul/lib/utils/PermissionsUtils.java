@@ -32,6 +32,7 @@ public class PermissionsUtils {
         String[] strings1 = new String[strings.size()];
         String[] strings2 = strings.toArray(strings1);
         openPermissions(activity, strings2);
+
     }
 
     private static boolean lacksPermission(String permission) {
