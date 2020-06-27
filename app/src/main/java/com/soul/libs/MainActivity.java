@@ -20,6 +20,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.tv_lib).setOnClickListener(this);
         findViewById(R.id.tv_frame).setOnClickListener(this);
         findViewById(R.id.tv_jni).setOnClickListener(this);
+
+
+
     }
 
     @Override
