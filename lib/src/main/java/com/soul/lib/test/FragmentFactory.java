@@ -46,9 +46,15 @@ public class FragmentFactory {
         List<String> classNameNew = new ArrayList<>();
         for (String className : classNames) {
             try {
-                final Class<?> aClass = Class.forName(className);
-                final Fragment fragment = (Fragment) aClass.newInstance();
 
+                final Class<?> aClass = Class.forName(className);
+                Object o = aClass.newInstance();
+                final Fragment fragment;
+                if (o instanceof Fragment) {
+                    fragment = (Fragment) o;
+                } else {
+                    continue;
+                }
 
                 Method method = aClass.getMethod("getClassName");
                 final String invoke = (String) method.invoke(fragment);
@@ -65,6 +71,8 @@ public class FragmentFactory {
             } catch (NoSuchMethodException e) {
                 e.printStackTrace();
             } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
