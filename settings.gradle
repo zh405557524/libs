@@ -1,2 +1,2 @@
-include ':app', ':lib', ':frame'
+include ':app', ':lib', ':frame', ':kotlin'
 rootProject.name='libs'
