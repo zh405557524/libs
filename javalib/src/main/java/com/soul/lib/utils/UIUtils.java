@@ -26,6 +26,7 @@ public class UIUtils {
         sContext = context;
         sHandler = handler;
         sMainThreadId = mainThreadId;
+        Utils.init(context);
     }
 
     /**

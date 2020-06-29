@@ -9,12 +9,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.soul.lib.R;
+import com.soul.lib.utils.ScreenUtils;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 
-public abstract class ButtonTextFragment extends Fragment implements IButtonText, IText {
+public abstract class ButtonTextFragment extends Fragment implements IButtonText, IText, IView {
 
     protected View mRootView;
     protected LinearLayout mLlRootView;
@@ -71,4 +72,23 @@ public abstract class ButtonTextFragment extends Fragment implements IButtonText
         return textView;
     }
 
+    private static final String VIEW_TAG = "view_tag";
+
+    @Override
+    public void addView(View view) {
+        View childAt = mLlRootView.getChildAt(mLlRootView.getChildCount() - 1);
+        if (VIEW_TAG.equals(childAt.getTag())) {
+            mLlRootView.removeView(childAt);
+        }
+
+        ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+        if (layoutParams == null) {
+            layoutParams = new LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        }
+        view.setTag(VIEW_TAG);
+        layoutParams.height = ScreenUtils.getScreenHeight();
+        layoutParams.width = ScreenUtils.getScreenWidth();
+        mLlRootView.addView(view, layoutParams);
+    }
 }

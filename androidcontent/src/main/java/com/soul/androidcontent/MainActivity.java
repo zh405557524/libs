@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         findViewById(R.id.bt_subassembly).setOnClickListener(this);
+        findViewById(R.id.bt_customview).setOnClickListener(this);
     }
 
     @Override
@@ -23,6 +24,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.bt_subassembly:
                 startActivity("com.soul.androidcontent.subassembly");
+                break;
+            case R.id.bt_customview:
+                startActivity("com.soul.androidcontent.customview");
                 break;
         }
     }
