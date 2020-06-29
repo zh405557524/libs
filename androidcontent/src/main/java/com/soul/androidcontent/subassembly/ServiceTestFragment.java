@@ -1,4 +1,4 @@
-package com.soul.libs.frame;
+package com.soul.androidcontent.subassembly;
 
 import android.content.ComponentName;
 import android.content.Intent;
@@ -7,6 +7,7 @@ import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
 
+import com.soul.androidcontent.subassembly.service.TestService;
 import com.soul.lib.test.ButtonTextFragment;
 
 import androidx.fragment.app.FragmentActivity;
@@ -14,7 +15,7 @@ import androidx.fragment.app.FragmentActivity;
 import static android.content.Context.BIND_AUTO_CREATE;
 
 /**
- * Description:
+ * Description:服务测试类
  * Author: 祝明
  * CreateDate: 2020/4/26 14:41
  * UpdateUser:

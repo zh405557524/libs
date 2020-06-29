@@ -1,5 +1,5 @@
 # android知识点
-## 一、四大组件
+## 一、android组件
 ### activity 知识点
 
 * 生命周期
@@ -141,8 +141,6 @@
       [ORDER BY <列名> [ASC|DESC]…]
     ~~~
 
-
-##
 ## 二、自定义View
 ## 三、动画
 ## 四、IPC

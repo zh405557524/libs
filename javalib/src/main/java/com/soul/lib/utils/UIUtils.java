@@ -3,6 +3,7 @@ package com.soul.lib.utils;
 import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Handler;
@@ -176,5 +177,18 @@ public class UIUtils {
             return "";
         }
         return serialNumber;
+    }
+
+    /**
+     * 启动一个activity
+     *
+     * @param context
+     * @param zClass
+     * @param flag
+     */
+    public static void startActivity(Context context, Class zClass, int flag) {
+        final Intent intent = new Intent(context, zClass);
+        intent.setFlags(flag);
+        context.startActivity(intent);
     }
 }
