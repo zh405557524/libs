@@ -13,4 +13,6 @@ import android.graphics.Canvas;
  */
 public interface CustomUI {
     void onDraw(Canvas canvas);
+
+    int getHeight();
 }

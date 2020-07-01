@@ -2,7 +2,9 @@ package com.soul.androidcontent.customview;
 
 import android.view.View;
 
+import com.soul.androidcontent.customview.paint.ColorFilterUI;
 import com.soul.androidcontent.customview.paint.GradientPaintUI;
+import com.soul.androidcontent.customview.paint.XFerModesUI;
 import com.soul.lib.test.ButtonTextFragment;
 
 /**
@@ -24,6 +26,8 @@ public class PaintTestFragment extends ButtonTextFragment implements View.OnClic
     @Override
     protected void initEvent() {
         addTextName("paint常用API", this);
+        addTextName("混合图层的用法", this);
+        addTextName("滤镜", this);
     }
 
 
@@ -35,6 +39,13 @@ public class PaintTestFragment extends ButtonTextFragment implements View.OnClic
             case "paint常用API":
                 customUI = new GradientPaintUI();
                 break;
+            case "混合图层的用法":
+                customUI = new XFerModesUI(getContext());
+                break;
+            case "滤镜":
+                customUI = new ColorFilterUI(getContext());
+                break;
+
         }
 
         CustomView customView = new CustomView(getContext());

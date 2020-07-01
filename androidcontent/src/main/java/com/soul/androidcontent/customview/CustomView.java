@@ -4,9 +4,10 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.LinearLayout;
 
 /**
- * Description: TODO
+ * Description: 自定义View
  * Author: zhuMing
  * CreateDate: 2020/6/29 17:54
  * ProjectName: libs
@@ -28,14 +29,16 @@ public class CustomView extends View {
 
     public CustomView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        //禁用硬件加速
+        setLayerType(View.LAYER_TYPE_SOFTWARE, null);
     }
-
-
-
 
 
     public void setUI(CustomUI paintUI) {
         mCustomUI = paintUI;
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams( LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.FILL_PARENT);
+        layoutParams.height = mCustomUI.getHeight();
+        setLayoutParams(layoutParams);
     }
 
     @Override

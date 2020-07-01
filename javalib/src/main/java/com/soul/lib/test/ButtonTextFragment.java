@@ -1,6 +1,7 @@
 package com.soul.lib.test;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import androidx.fragment.app.Fragment;
 
 public abstract class ButtonTextFragment extends Fragment implements IButtonText, IText, IView {
 
+    private static final String TAG = ButtonTextFragment.class.getSimpleName();
     protected View mRootView;
     protected LinearLayout mLlRootView;
 
@@ -84,11 +86,12 @@ public abstract class ButtonTextFragment extends Fragment implements IButtonText
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
         if (layoutParams == null) {
             layoutParams = new LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                    ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT);
         }
         view.setTag(VIEW_TAG);
-        layoutParams.height = ScreenUtils.getScreenHeight();
-        layoutParams.width = ScreenUtils.getScreenWidth();
+        layoutParams.height = layoutParams.height <= 0 ? ScreenUtils.getScreenHeight() : layoutParams.height;
+        layoutParams.width = layoutParams.width <= 0 ? ScreenUtils.getScreenWidth() : layoutParams.width;
+        Log.i(TAG, "height:" + layoutParams.height + "    width:" + layoutParams.width);
         mLlRootView.addView(view, layoutParams);
     }
 }

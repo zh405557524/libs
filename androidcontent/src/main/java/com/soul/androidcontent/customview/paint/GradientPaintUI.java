@@ -10,6 +10,7 @@ import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.RadialGradient;
+import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.SweepGradient;
 
@@ -20,7 +21,7 @@ import com.soul.lib.utils.LogUtils;
 import static com.soul.lib.utils.UIUtils.getResources;
 
 /**
- * Description: PaintAPI集合
+ * Description: Paint API 集合
  * Author: zhuMing
  * CreateDate: 2020/6/29 17:57
  * ProjectName: libs
@@ -40,13 +41,14 @@ public class GradientPaintUI implements CustomUI {
      *   setStrokeWidth(4);//描边宽度
      *   setStrokeCap(Paint.Cap.ROUND);//圆角效果 BUTT 默认; ROUND 圆角;SQUARE 方形
      *   setStrokeJoin(Paint.Join.MITER);//拐角风格 MITER 尖角;ROUND 切除尖角;BEVEL 圆角
+     *   setShader(new SweepGradient(200, 200, Color.BLUE, Color.RED));//设置环形渲染器
      */
 
     /**
      * 画笔
      */
     private final Paint mPaint;
-    private final Shader mShader;
+
     private final Bitmap mBitmap;
     /**
      * 线性渲染
@@ -62,6 +64,17 @@ public class GradientPaintUI implements CustomUI {
      * 扫描渲染
      */
     private final SweepGradient mSweepGradient;
+
+    /**
+     * 位图渲染
+     */
+    private final BitmapShader mBitmapShader;
+
+    /**
+     * 组合渲染
+     */
+    private final ComposeShader mComposeShader;
+    private final Paint mPaintShader;
 
     public GradientPaintUI() {
         //获取bitmap
@@ -79,28 +92,30 @@ public class GradientPaintUI implements CustomUI {
         //5、设置描边宽度为4
         mPaint.setStrokeWidth(10);
 
-        //1、线性渲染
-        mLinearGradient = new LinearGradient(0, 0, 250, 250, new int[]{Color.RED, Color.BLUE, Color.GREEN},
+
+        mPaintShader = new Paint();
+        mPaintShader.setColor(Color.BLUE);
+        //6.1、线性渲染
+        mLinearGradient = new LinearGradient(0, 0, 250, 0, new int[]{Color.RED, Color.BLUE, Color.GREEN},
                 new float[]{0.1f, 0.5f, 1f}, Shader.TileMode.CLAMP);
-        //2 环形渲染
-        mRadialGradient = new RadialGradient(250, 250, 250, new int[]{Color.GREEN, Color.YELLOW, Color.RED},
+        //6.2 环形渲染
+        mRadialGradient = new RadialGradient(0, 0, 100, new int[]{Color.GREEN, Color.YELLOW, Color.RED},
                 null, Shader.TileMode.CLAMP);
 
-        //3 扫描渲染
+        //6.3 扫描渲染
         mSweepGradient = new SweepGradient(250, 250, Color.RED, Color.GREEN);
 
-        //4 位图渲染
-        //        mShader = new BitmapShader(mBitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
+        //6.4 位图渲染
+        mBitmapShader = new BitmapShader(mBitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
         //        mShader = new BitmapShader(mBitmap, Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
         //        mShader = new BitmapShader(mBitmap, Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
 
-        //5 组合渲染
+        //6.5 组合渲染
         BitmapShader bitmapShaderCompose = new BitmapShader(mBitmap,
                 Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
         LinearGradient linearGradientCompose = new LinearGradient(0, 0, 1000, 16000, new
                 int[]{Color.RED, Color.GREEN, Color.BLUE}, null, Shader.TileMode.CLAMP);
-
-        mShader = new ComposeShader(bitmapShaderCompose, linearGradientCompose, PorterDuff.Mode.MULTIPLY);
+        mComposeShader = new ComposeShader(bitmapShaderCompose, linearGradientCompose, PorterDuff.Mode.MULTIPLY);
 
     }
 
@@ -124,6 +139,43 @@ public class GradientPaintUI implements CustomUI {
         canvas.translate(100, 0);
 
         canvas.restore();
+        //6.1、线性渲染
+        canvas.translate(200, 100);
+        mPaintShader.setShader(mLinearGradient);
+        RectF rectF = new RectF(0, 0, 250, 100);
+        canvas.drawRect(rectF, mPaintShader);
+
+
+        //6.2 环形渲染
+        canvas.translate(100, 200);
+        mPaintShader.setShader(mRadialGradient);
+        mPaintShader.setStyle(Paint.Style.FILL);
+        canvas.drawCircle(0, 0, 100, mPaintShader);
+        canvas.translate(0, 200);
+
+        //6.3 扫描渲染
+        mPaintShader.setShader(mSweepGradient);
+        canvas.drawRect(rectF, mPaintShader);
+        canvas.translate(0, 200);
+
+        //6.4 位图渲染
+        mPaintShader.setShader(mBitmapShader);
+        mPaintShader.setStyle(Paint.Style.FILL);
+        canvas.drawCircle(0, 0, 100, mPaintShader);
+        canvas.translate(0, 200);
+
+        //6.5 组合渲染
+        mPaintShader.setShader(mComposeShader);
+        mPaintShader.setStyle(Paint.Style.FILL);
+        canvas.drawCircle(0, 0, 100, mPaintShader);
+        canvas.translate(0, 200);
+
+        canvas.restore();
+    }
+
+    @Override
+    public int getHeight() {
+        return 0;
     }
 
 }
