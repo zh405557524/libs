@@ -455,11 +455,18 @@
        mPaint.setColor(Color.BLUE);
        canvas.drawRect(0,0,400,400,mPaint);
        canvas.restoreToCount(state);//手动指定的返回到状态1
-
-
 ### 3、path
+* 1、概念
+    路径，可用于绘制直线，曲线构成几何路径，还可用于根据路径绘制文字
+* 2、常用api
+    常用api如移动，连线，闭合，添加图形等。
+* 3、[贝塞尔曲线](https://github.com/zh405557524/AndroidNote2/blob/master/CustomView/Advance/%5B06%5DPath_Bezier.md)
+
+
+
 ### 4、matrix
 ### 5、anim(动画)
+
 ### 6、touch(事件分发模型)
 ### 7、screen(屏幕适配)
 ### 8、project

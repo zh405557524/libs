@@ -21,6 +21,7 @@ public class BasicsTestFragment : ButtonTextFragment(), View.OnClickListener {
 
     override fun initEvent() {
         addTextName("基础语法", this)
+        addTextName("基本数据类型", this)
     }
 
 
@@ -29,6 +30,10 @@ public class BasicsTestFragment : ButtonTextFragment(), View.OnClickListener {
         when (v?.getTag()) {
             "基础语法" -> {
                 Grammar().main(null)
+            }
+
+            "基本数据类型" -> {
+                DataType().main(null)
             }
         }
 

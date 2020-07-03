@@ -438,6 +438,7 @@
     ~~~kotlin
       when {
           x.isOdd() -> print("x is odd")
+         
           x.isEven() -> print("x is even")
           else -> print("x is funny")
       }

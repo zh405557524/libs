@@ -61,11 +61,32 @@ class Grammar {
         cutLine()
 
         // 5、类型检查
-
         run {
             getStringLength("fdsafds")
             getStringLength(3431243)
         }
+
+        cutLine()
+        //7、区间
+        run {
+            // 区间表达式由具体操作符形式 `..` 的rangeTo 函数辅以 in 和！in形成。
+            for (i in 1..4) Log.i(TAG, "i:" + i)//输出 1 2 3 4
+            cutLine()
+            for (i in 4..1) Log.i(TAG, "I:" + i)//什么都不输出
+            cutLine()
+            for (i in 1..10) Log.i(TAG, "i:" + i)
+            cutLine()
+            //使用step
+            for (i in 1..4 step 2) Log.i(TAG, "i:" + i) //输出1 3
+            cutLine()
+            for (i in 4 downTo 1 step 2) Log.i(TAG, "i:" + i) //输出4 2
+            cutLine()
+            //使用 until 函数排除结束元素
+            for (i in 1 until 10) Log.i(TAG, "i:" + i)
+            cutLine()
+        }
+        cutLine()
+
 
     }
 
