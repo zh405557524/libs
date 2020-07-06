@@ -1,6 +1,8 @@
 package com.soul.libs.lib;
 
+import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.soul.lib.test.ButtonTextFragment;
 
@@ -29,6 +31,20 @@ public class AppTestFragment extends ButtonTextFragment implements View.OnClickL
         addTextName("打开App", this);
         addTextName("获取App包名", this);
         addTextName("获取App具体设置", this);
+
+
+        TextView context ;
+        context = null;
+        TextView context1 = context;
+        context = new TextView(getContext());
+        View view = (View) null;
+        Log.i("Tag", "context1:" + context1 + "   view:" + view);
+        try {
+            context.append("fsdafdsa");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override

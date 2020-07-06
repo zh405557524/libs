@@ -4,6 +4,7 @@ import android.view.View;
 
 import com.soul.androidcontent.customview.path.BezierView;
 import com.soul.androidcontent.customview.path.DragBubbleView;
+import com.soul.androidcontent.customview.path.PathMeasureView;
 import com.soul.androidcontent.customview.path.PathView;
 import com.soul.lib.test.ButtonTextFragment;
 
@@ -27,6 +28,7 @@ public class PathTestFragment extends ButtonTextFragment implements View.OnClick
         addTextName("PathAPI用法", this);
         addTextName("多阶贝塞尔曲线", this);
         addTextName("爆炸气球", this);
+        addTextName("path测量的用法", this);
     }
 
 
@@ -46,9 +48,11 @@ public class PathTestFragment extends ButtonTextFragment implements View.OnClick
             case "爆炸气球":
                 view = new DragBubbleView(getContext());
                 break;
+            case "path测量的用法":
+                view = new PathMeasureView(getContext());
+                break;
         }
-
         addView(view);
-
     }
+
 }
