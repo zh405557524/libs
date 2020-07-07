@@ -6,8 +6,9 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.soul.matrixcamera.api.BaseView;
-import com.soul.matrixcamera.api.CameraTranslate;
+import com.soul.androidcontent.customview.matrix.api.BaseView;
+import com.soul.androidcontent.customview.matrix.api.CameraTranslate;
+
 
 /**
  * Description:

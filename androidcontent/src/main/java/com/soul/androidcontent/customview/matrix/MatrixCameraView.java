@@ -1,12 +1,16 @@
 package com.soul.androidcontent.customview.matrix;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+
+import com.soul.androidcontent.R;
+import com.soul.androidcontent.customview.matrix.api.Rotate3dAnimation;
+
+import androidx.annotation.Nullable;
 
 /**
  * @描述：view的相机
@@ -34,11 +38,6 @@ public class MatrixCameraView extends FrameLayout {
 
     public MatrixCameraView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-    }
-
-    @Override
-    protected void onFinishInflate() {
-        super.onFinishInflate();
         View view = View.inflate(getContext(), R.layout.text_image, null);
         addView(view);
         ImageView imageView = (ImageView) view.findViewById(R.id.iv_imageView);
@@ -58,6 +57,11 @@ public class MatrixCameraView extends FrameLayout {
                 v.startAnimation(rotation);
             }
         });
+    }
+
+    @Override
+    protected void onFinishInflate() {
+        super.onFinishInflate();
 
 
     }
