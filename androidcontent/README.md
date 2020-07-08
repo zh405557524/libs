@@ -111,7 +111,7 @@
 
   * 创建表
 
-    ~~~java
+    ~~~
     CREATE TABLE <表名>(<列名> <数据类型>[列级完整性约束条件]
                       [,<列名> <数据类型>[列级完整性约束条件]]…);
     ~~~
@@ -122,7 +122,7 @@
 
   * 修改表
 
-    ~~~java
+    ~~~
     -- 添加列
     ALTER TABLE <表名> [ADD <新列名> <数据类型>[列级完整性约束条件]]
     -- 删除列
@@ -133,7 +133,7 @@
 
   * 查询
 
-    ~~~java
+    ~~~
     SELECT [ALL | DISTINCT] <目标列表达式>[,<目标列表达式>]…
       FROM <表名或视图名>[,<表名或视图名>]…
       [WHERE <条件表达式>]
@@ -344,9 +344,9 @@
     
     
     ​    
-        View.setLayerType() 直接把整个View都绘制在离屏缓冲中。
-        setLayerType(LAYER_TYPE_HARDWARE)使用GPU来缓冲，
-        setLayerTYpe(LAYER_TYPE_SOFTWARE) 使用一个bitmap来缓冲
+    ​    View.setLayerType() 直接把整个View都绘制在离屏缓冲中。
+    ​    setLayerType(LAYER_TYPE_HARDWARE)使用GPU来缓冲，
+    ​    setLayerTYpe(LAYER_TYPE_SOFTWARE) 使用一个bitmap来缓冲
 
 * 4、 paint详解-效果相关
 
@@ -355,7 +355,7 @@
        LightingColorFilter
        构造方法：
        LightingColorFilter(int mul,int add)
-    
+        
        参数:
        mul 和 add 都是和颜色值格式相同的int值，其中mul用来和目标像素相乘，add用来和目标像素相加:
        R` = R*mul.R/0xff+add.R
@@ -376,7 +376,7 @@
        参数:
        color,具体的颜色值，例如Color.RED
        mode ,指定PorterDuff.Mode 混合模式
-    
+        
        使用:
        PorterDuffColorFilter porterDuffColorFilter = new 
        PorterDuffColorFilter(Color.RED,PorterDuff.Mode.DARKEN);
@@ -418,7 +418,7 @@
 1. 绘制几何图形，文本，位图等 
 
        view drawBitmap(Bitmap bitmap,float left,float top,Paint paint);在指定坐标绘制位图
-     
+         
        void drawLine(float startX,float startY,float stopX,float stopY,Paint paint);根据给定的起始点和结束点之间绘制连线
        
        void drawPath(Path path,Paint paint);根据给定的path，绘制连线。
@@ -442,10 +442,11 @@
        void clipOutXXX(...);反向切割操作，参数指定区域内部不可以绘制
        
        void setMatrix(Matrix matrix);可通过matrix实现平移，缩放，旋转等操作。
-    
+   
 3. 状态保存和恢复
 
-       Canvas 调用了translate,scale,rotate,skew,clipRect等变化后，后续的操作都是基于变化后的Canvas,都会收到影响，对于后续的操作很不方便。Canvas提供了save，saveLayer,saveLayerAlpha,restore,restoreToCount来保存和恢复状态。
+       Canvas 调用了translate,scale,rotate,skew,clipRect等变化后，后续的操作都是基于变化后的Canvas,
+       都会收到影响，对于后续的操作很不方便。Canvas提供了save，saveLayer,saveLayerAlpha,restore,restoreToCount来保存和恢复状态。
        
        int state = canvas.save();//保存状态1 
        canvas.translate(70,50);
@@ -529,19 +530,458 @@
         
 ### 4、matrix
 [Camera](https://github.com/GcsSloop/AndroidNote/blob/master/CustomView/Advance/%5B11%5DMatrix_3D_Camera.md)
-   
+
 ### 5、anim(动画)
+* 1、两种动画
+  
+    * 1、视图动画
+        * Tween Animation(补间动画)
+        > 平移动画	translate	TranslateAnimation	移动View
+          缩放动画	scale	ScaleAnimation	放大或缩小View
+          旋转动画	rotate	RotateAnimation	旋转View
+          透明度动画	alpha	AlphaAnimation	改变View的透明度
+        
+         	 动态的Xml文件，路径为res/anim/filename.xml
+      
+      ~~~xml
+      <?xml version="1.0" encoding="utf-8"?>
+        <!--res/anim/filename.xml   -->
+      <set xmlns:android="http://schemas.android.com/apk/res/android"
+          android:shareInterpolator="true"
+          android:duration="300"
+          android:fillAfter="true"
+          android:interpolator="@android:anim/accelerate_interpolator"
+          android:repeatMode="reverse"
+          >
+          <!--属性
+          repeatMode 插值器
+           shareInterpolator:表示集合中的动画是否和集合共享同一个插值器。如果集合不指定插值器，那么子动画就需要单独制定所需的插值器或者使用默认值
+           duration:动画持续时间
+           fillAfater:动画结束以后View是否停留在结束位置，true表示View停留在结束位置，false则不停留
+            android:repeatMode  动画重复的Mode
+           -->
+      
+          <alpha
+              android:fromAlpha="0.1"
+              android:toAlpha="1"></alpha>
+          <!--透明度动画
+           fromAlpha表示透明度起始值,
+           toAlpha表示透明度结束值-->
+      
+      
+          <scale
+              android:fromXScale="0.5"
+              android:fromYScale="0.5"
+              android:pivotX="20"
+              android:pivotY="20"
+              android:toXScale="1.2"
+              android:toYScale="1"
+              ></scale>
+          <!--缩放动画
+          android:fromXScale-水平方向缩放的起始值
+          android:toXScale-水平方向缩放结束值
+          android:fromYScale-竖直方向缩放的起始值
+          android:toScale-竖直方向缩放结束值
+          android:pivotX 缩放轴点的x坐标
+          android:pivotY缩放轴点的y坐标-->
+      
+          <translate
+              android:fromXDelta="0"
+              android:fromYDelta="0"
+              android:toXDelta="100"
+              android:toYDelta="100"></translate>
+          <!-- 平移动画
+          android:fromXDelta-表示x的起始值
+          android:toXDelta-表示x的结束值
+          android:fromYDelta-表示y的起始值
+          android:toYDelta-表示y的结束值
+          -->
+      
+          <rotate
+              android:fromDegrees="0"
+              android:pivotX="10"
+              android:pivotY="10"
+              android:toDegrees="180"></rotate>
+          <!--旋转动画
+          android:fromXDelta-旋转开始的角度
+          android:toDegrees="180"-旋转结束的角度
+          pivotX 缩放轴点的x坐标
+          pivotY缩放轴点的y坐标
+           默认情况下轴点是View的中心点-->  
+      </set>
+      
+      ~~~
+       ~~~android
+          mImg = (ImageView) findViewById(R.id.boy);
+          Animation animation = AnimationUtils.loadAnimation(ViewAnimationActivity.this, R.anim.view_animation1);
+          mImg.startAnimation(animation);
+       ~~~
+       ~~~android
+           AlphaAnimation alphaAnimation = new AlphaAnimation(0, 1);
+           alphaAnimation.setDuration(300);
+           mImg.startAnimation(alphaAnimation);
+           //创建一个透明度动画，将img透明度在300ms内由0变成1
+       
+           TranslateAnimation translateAnimation = new TranslateAnimation(0,100,0,100);
+           mImg.startAnimation(translateAnimation);
+           //...
+       ~~~
+       * FrameAnimation (帧动画)
+       ~~~xml
+      <?xml version="1.0" encoding="utf-8"?>
+          <!-- res/drawable/frame_animation.xml -->
+          <animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+              android:oneshot="false">
+          
+              <item
+                  android:drawable="@drawable/bga_refresh_loading01"
+                  android:duration="100" />
+              <item
+                  android:drawable="@drawable/bga_refresh_loading02"
+                  android:duration="100" />
+              <item
+                  android:drawable="@drawable/bga_refresh_loading03"
+                  android:duration="100" />
+          
+          </animation-list>
+       ~~~
+       ~~~android
+         mLoading = (ImageView) findViewById(R.id.frameImg);
+            mLoading.setBackgroundResource(R.drawable.refresh_loading);
+            AnimationDrawable drawable = (AnimationDrawable) mLoading.getBackground();
+            drawable.start();
+       ~~~
+       
+      * View Animation的特殊使用场景
+        通过LayoutAnimation实现ViewGroup子元素出场动画效果
+        1.定义LayoutAnimation
+                `// res/anim/anim_layout`
+        ~~~xml
+        <?xml version="1.0" encoding="utf-8"?>
+               <layoutAnimation xmlns:android="http://schemas.android.com/apk/res/android"
+                   android:delay="0.5"
+                   android:animation="@anim/anim_item"
+                   android:animationOrder="normal">
+               </layoutAnimation>
+               
+               <!-- 
+               
+                **android:delay**
+                 表示子元素开始动画的时间延迟，比如子元素入场动画的时间周期为300ms,那么0.5表示每个元素都要延
+                                   迟150ms才能播放入场动画。比如第一个元素延迟150ms，第二个延迟300ms,以此类推。
+                 **android:animationOrder**
+                表示子元素动画的顺序，有三种选项：normal、reverse和random，分别代表子元素出场按顺序显示、逆向显示和随机显示。          
+               **android:animation**
+               -->
+              
+        ~~~
+        2.为元素指定具体的入场动画
+                `// res/anim/anim_item.xml`
+        ~~~xml
+        <?xml version="1.0" encoding="utf-8"?>
+            <set xmlns:android="http://schemas.android.com/apk/res/android"
+                android:duration="300"
+                android:interpolator="@android:anim/decelerate_interpolator"
+                android:shareInterpolator="true">
+            
+                <alpha
+                    android:fromAlpha="0.0"
+                    android:toAlpha="1.0" />
+                <scale
+                    android:fromYScale="0.5"
+                    android:toYScale="1.2" />
+            
+            </set>
+        ~~~
+        3.为ViewGroup指定android:layoutAnimation属性。
+        ~~~xml
+            <ListView
+                    android:id="@+id/lv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layoutAnimation="@anim/anim_layout" />
+        ~~~
+        * 除了在XML中指定LayoutAnimation外，还可以通过LayoutAnimationController来实现，具体代码如下所示
+        ```
+            mLv = (ListView) findViewById(R.id.lv);
+            Animation animation = AnimationUtils.loadAnimation(this, R.anim.anim_item);
+            LayoutAnimationController controller = new LayoutAnimationController(animation);
+            controller.setDelay(0.5f);
+            controller.setOrder(LayoutAnimationController.ORDER_NORMAL);
+            mLv.setLayoutAnimation(controller );
+        ```
+        
+    * 2、属性动画
+        * 核心类
+        |   Java类           | 说明            |
+        |    ----            | ----            |
+        |  ValueAnimator     | 动画执行类；核心 |      
+        |  ObjectAnimator    | 动画执行类       | 
+        |  TimeInterpolator  | 时间插值（插值器接口），控制动画变化率       | 
+        |  TypeEvaluator     | 类型估值（估值器接口），设置属性值计算方式，根据属性的 始 & 末值 和 插值 一起计算出当前时间的属性值      | 
+        |  AnimatorSet       | 动画集     | 
+        |  AnimatorInflater       | 加载属性动画的XML文件     | 
+             
+        * 额外的类
+        |   Java类                  | 说明            |
+        |    ----                   | ----            |
+        |  LayoutTransition         | 布局动画，为布局的容器设置动画 |  
+        |  ViewPropertyAnimator     | 为View的动画操作提供一种更加便捷的用法 |  
+        |  PropertyValuesHolder     | 保存动画过程中所需要操作的属性和对应的值 |  
+        |  Keyframe                 | 控制每个时间段执行的动画距离 |  
+        |  AnimationListener        | AnimationUpdateListener |  
+        |  AnimatorListenerAdapter  | 动画事件的监听 |  
+                  	
+        * 具体使用
+        1.`ofInt`
+          ~~~android
+          //设置动画 始 & 末值
+          //ofInt()两个作用：
+          //1. 获取实例
+          //2. 在传入参数之间平滑过渡
+          //如下则0平滑过渡到3
+          ValueAnimator animator = ValueAnimator.ofInt(0,3);
+          //如下传入多个参数，效果则为0->5,5->3,3->10
+          //ValueAnimator animator = ValueAnimator.ofInt(0,5,3,10);
+          
+          //设置动画的基础属性
+          animator.setDuration(5000);//播放时长
+          animator.setStartDelay(300);//延迟播放
+          animator.setRepeatCount(0);//重放次数
+          animator.setRepeatMode(ValueAnimator.RESTART);
+          //重放模式
+          //ValueAnimator.START：正序
+          //ValueAnimator.REVERSE：倒序
+          
+          //设置更新监听
+          //值 改变一次，该方法就执行一次
+          animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+              @Override
+              public void onAnimationUpdate(ValueAnimator animation) {
+                  //获取改变后的值
+                  int currentValue = (int) animation.getAnimatedValue();
+                  //输出改变后的值
+                  Log.d("1111", "onAnimationUpdate: " + currentValue);
+                  
+                  //改变后的值发赋值给对象的属性值
+                  view.setproperty(currentValue);
+                  
+                  //刷新视图
+                  view.requestLayout();
+              }
+          });
+          //启动动画
+          animator.start();
+          ~~~   	
+          ~~~xml
+                // ValueAnimator采用<animator>  标签
+                <animator xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:duration="1000"
+                    android:valueFrom="1"
+                    android:valueTo="0"
+                    android:valueType="floatType"
+                    android:repeatCount="1"
+                    android:repeatMode="reverse"/>
+                />
+          ~~~
+          ~~~android
+            Animator animator = AnimatorInflater.loadAnimator(context, R.animator.set_animation);  
+            // 载入XML动画
+            
+            animator.setTarget(view);  
+            // 设置动画对象
+            
+            animator.start();  
+            // 启动动画
+          ~~~
+          
+         2.`ofFloat`与 `ofInt` 一样，返回值不一样
+         
+         3.`ofObject()`
+            ~~~android
+            // 创建初始动画的对象  & 结束动画的对象
+            Point point1 = new Point ();  
+            Point point2 = new Point ();  
+            
+            // 创建动画对象 & 设置参数
+            ValueAnimator anim = ValueAnimator.ofObject(new myObjectEvaluator(), point1 , point2 );  
+            // 参数说明
+            // 1. 自定义的估值器对象（TypeEvaluator 类型参数） - 下面会详细介绍
+            // 2. 初始动画的对象
+            // 3. 结束动画的对象
+            anim.setDuration(length);  
+            anim.start();
+            ~~~
+    
+    
+* 2、属性动画的原理分析
+* 3、插值器
+    > Interpolator对象	资源id	功能作用
+      AccelerateDecelerateInterpolator	@android:anim/accelerate_ decelerate_interpolator	先加速再减速
+      AccelerateInterpolator	@android:anim/accelerate_ interpolator	加速
+      AnticipateInterpolator	@android:anim/anticipate_ interpolator	先回退一小步然后加速前进
+      AnticipateOvershootInterpolator	@android:anim/anticipate_ overshoot_interpolator	在上一个基础上超出终点一小步再回到终点
+      BounceInterpolator	@android:anim/bounce_ interpolator	最后阶段弹球效果
+      CycleInterpolator	@android:anim/cycle_interpolator	周期运动
+      DecelerateInterpolator	@android:anim/decelerate_ interpolator	减速
+      LinearInterpolator	@android:anim/linear_interpolator	匀速
+      OvershootInterpolator	@android:anim/overshoot_ interpolator	快速到达终点并超出一小步最后回到终点
+
+* 4、滑动
 
 ### 6、touch(事件分发模型)
+
 
 ### 7、screen(屏幕适配)
 
 ### 8、project
 
-## 四、IPC
-## 五、framwork层、开机启动，AMS
+## 四、Binder
+
+### 一、概述
+
+* 1.1binder时一种进程间通信机制，基于开源的OpenBinder实现。
+* 1.2android的4大组件之间的通信依赖Binder IPC机制.系统对应用层的服务：AMS、PMS都是基于Binder IPC机制来实现。
+* 1.3linux 已有的ipc ：管道、消息队列、共享内存、socket。binder只需要一次数拷贝，而ssocket/管道/消息队列需要两次。
+           binder 基于c/s架构，稳定性好。binder为每个app分配uid，进程的uid是鉴别进程身份的重要标志。（性能、稳定、安全)
+
+### 二、linux下传统的进程通信原理
+
+* 1.1基本概念
+
+  * 进程隔离
+
+    > 1、操作系统中，进程与进程内存是不共享的
+    >
+    > 2、不同进程数据交互需要采用IPC机制。
+
+  * 进程空间划分:用户空间(User Space)/内核空间(Kernel Space)
+
+    > 1、内核空间是系统内核运行的空间，用户空间是用户程序运行的空间（1G内核/3G用户）
+    >
+    > 2.它们之间是隔离的。
+
+  * 系统调用:用户态/内核态
+
+    > 1.用户空间对内核空间进行访问，借助系统调用来实现。
+    >
+    > 2.linux 两级保护机制:0级供系统内核使用  ，3级供用户程序使用。
+    >
+    > 3.当一个任务(进程)执行系统调用而陷入内核代码中执行时，称进程处于内核运行态(内核态)。此时处理器处于特权级最高的(0级)内核代码中执行。执行的内核代码会使用当前进程的内核栈。每个进程都有自己的内核栈。
+    >
+    > 4.当进程执行用户自己的代码的时候，我们称其处于用户运行态(用户态)。此时处理器在特权级最低的(3级)用户代码中运行。
+    >
+    > 5.系统调用主要通过如下两个函数来实现
+    >
+    > copy_from_user()//将数据从用户空间拷贝到内核空间。
+    >
+    > copy_to_user() //将数据从内核空间拷贝到用户空间。
+
+* 1.2 linux下的传统ipc通信原理
+
+  > 1.消息发送方：数据 ---放入--->内存缓存区中 ----系统调用----> 内核态 ---分配空间--->内核缓存区 -------copy_from_user-------->用户空间的内存缓存区拷贝到内核空间缓冲区中。
+  >
+  > 2.消息接受方: 用户空间开辟一块内存缓冲区-----copy_to_user----->将数据从内核缓冲区拷贝到接受进程的内存缓冲区。
+  >
+  > 缺点：
+  >
+  > 1.性能低下，一次数据传递需要经历：内存缓冲区--->内核缓冲区----->内存缓冲区，需要2次数据拷贝。
+  >
+  > 2.接受数据的缓冲区由数据接受进程提供，但是接受进程并不知道需要多大的空间来存放将来传递过来的数据，因此只能开辟尽可能达的内存空间或者先调用API接受消息头获取消息体的大小，这种做法不是浪费空间就是浪费时间。
+  >
+  > 
+  >
+  > 通常的做法是消息发送方将要发送的数据存放在内存缓存区中，通过系统调用进入内核态。然后内核程序在内核空间分配内存，开辟一块内核缓存区，调用 copy_from_user() 函数将数据从用户空间的内存缓存区拷贝到内核空间的内核缓存区中。同样的，接收方进程在接收数据时在自己的用户空间开辟一块内存缓存区，然后内核程序调用 copy_to_user() 函数将数据从内核缓存区拷贝到接收进程的内存缓存区。这样数据发送方进程和数据接收方进程就完成了一次数据传输，我们称完成了一次进程间通信。
+
+  
+
+  ![1](/pic_res/binder的由来.jpg)
+
+  ![](/pic_res/binder优点.png)
+
+### 三、binder 跨进程通信原理
+
+* 3.1  动态内核可加载模块 && 内存映射
+
+  * 动态内核可加载模块
+
+    > 1.传统ipc机制 (管道，socket) 都是内核的一部分,binder不是linux系统内核的一部分,
+    >
+    > 2.linux的 动态内核可加载模块 的机制。模块是具有独立功能的程序，它可以被单独编译，但是不能独立运行。它在运行时被链接到内核做为内核的一部分运行。android系统通过动态添加一个内核模块运行在内核空间。负责各个用户进程通过binder实现通信的内核就叫 Binder 驱动（binder dirver）。
+
+  * 内存映射
+
+    > 1.binder ipc 内存映射通过 mmap()来实现，mmap()是操作系统中一种内存映射的方法。
+    >
+    > 2.将用户空间的一块内存区域映射到内核空间，
+    >
+    > 3.映射关系建立后，用户对这块内存区域的修改可以直接反应到内核空间；反之内核空间对这段区域的修改也能直接反应到用户空间。
+    >
+    > 4.内存映射减少数据拷贝次数。
+
+* 3.2 Binder IPC 实现原理
+
+  * mmap()  内存映射
+
+    > 1.mmap()通常是用在有物理介质的文件系统上。
+    >
+    > 2.一般读取磁盘上的数据 需要 两次拷贝(磁盘->内核空间->用户空间)；mmap 通过物理介质和用户空间之间建立映射，减少拷贝次数。
+    >
+    > 3.binder 不存在物理介质，binder使用mmap(),用来在内核空间创建数据接受的缓存空间。
+
+  * 完整的BInder IPC 通信过程通常是这样:
+
+    > 1.首先binder驱动 在内核空间创建了一个**数据接受缓存区**；
+    >
+    > 2.接着在内核空间开辟一块**内核缓存区**，建立**内核缓存区**和内核中**数据接受缓存区**之间的映射关系，以及内核中数据接受缓存区和**接受进程用户空间地址**的映射关系。
+    >
+    > 3.发送方进程通过系统调用copy_from_user()将数据copy到**内核缓存区**，由于内核缓存区和接受进程的用户空间存在内存映射，因此也就相当于把数据发送到了接受进程的用户空间，这样便完成了一次进程进程间的通信。
+
+### 四、Binder 通信模型
+
+* 4.1client/server/serviceManger/驱动
+  * client、server、serviceManger运行在用户空间，binder驱动在内核空间。serviceManger和binder 由系统提供，client和server由应用程序实现
+  * client、server和ServiceManager均是通过系统调用open、mmap和ioctl来访问设备文件/dev/binder，从而实现binder 驱动的交互来间接的实现跨进程通信。
+* 4.2 binder 通信过程
+  * 1、首先一个进程使用 BINDER_SET_CONTEXT_MGR 命令通过binder驱动将自己注册成为 ServiceManger；
+  * 2、server 通过驱动向serverManger 中注册Binder (Server中的bidner 实体)，表明可以对外提供服务。驱动为这个binder创建位于内核中的实体节点以及ServiceManger对实体的引用，将名字以及新建的引用打包传给ServiceManger，ServiceManger将其填入查找表。
+  * 3、client通过名字，在binder驱动的帮助下从ServiceMager中获取到对Binder实体的引用，通过这个引用就能实现和Server进程的通信。
+* 4.3 Binder 通信中的代理模式
+  * A进程获取b进程时的objet 时，驱动会返回一个跟object一样的代理对象，具有跟object一样的方法。 
+  * 当binder 驱动接受到A 进程的消息后，发现这是个代理对象(objectProxy)就去查询自己维护的表单，一查发现这个是B进程object的代理对象。于是就会去通知B进程调用object的方法，并要求B进程把返回的结果发给自己。当驱动拿到B进程的返回结果后 就转发给A进程，这样一次通信就完成了。
+* 4.4 Binder 的完整定义
+  * 从进程间通信的角度看，Binder是一种进程间通信机制；
+  * 从server 进程的角度看Binder 指的是Server 中的BInder 实体对象。
+  * 从client 进程的角度看，Binder指的是对Binder代理对象，是Binder实体对象的一个远程代理
+  * 从传输过程的角度看，Binder 是一个可跨进程传输的对象；Binder驱动会对这个跨越进程边界的对象一点点特殊处理，自动完成代理对象和本地对象之间的转换。
+* 线程池
+  * 客户端与binder建立链接 是有线程池做管理，当一个进程与binder的连接数大于16时，会被阻塞。
+
+### 五、Binder四个重要对象
+
+* IBinder
+
+  > 只要实现了这个接口 就具备了跨进程的能力
+
+* IInterface
+
+  > server端具备什么样的能力，具备什么样的功能。
+
+* Binder
+
+  > binder 的本地类，代理类
+
+* Stub
+
+  > binder 的本地对象，server端给client的代理类
+
+* 一次binder android 的调用。
+
+
+## 五、android源码分析
+
 ## 六、apk相关，打包，编译，安装，签名
-## 七、虚拟机编译过程
+## 七、虚拟机
 ## 八、性能优化
 ## 九、热更新
 
