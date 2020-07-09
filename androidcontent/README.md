@@ -616,15 +616,16 @@
           Animation animation = AnimationUtils.loadAnimation(ViewAnimationActivity.this, R.anim.view_animation1);
           mImg.startAnimation(animation);
        ~~~
+      
        ~~~android
-           AlphaAnimation alphaAnimation = new AlphaAnimation(0, 1);
-           alphaAnimation.setDuration(300);
-           mImg.startAnimation(alphaAnimation);
-           //创建一个透明度动画，将img透明度在300ms内由0变成1
-       
-           TranslateAnimation translateAnimation = new TranslateAnimation(0,100,0,100);
-           mImg.startAnimation(translateAnimation);
-           //...
+         AlphaAnimation alphaAnimation = new AlphaAnimation(0, 1);
+         alphaAnimation.setDuration(300);
+         mImg.startAnimation(alphaAnimation);
+         //创建一个透明度动画，将img透明度在300ms内由0变成1
+         
+         TranslateAnimation translateAnimation = new TranslateAnimation(0,100,0,100);
+         mImg.startAnimation(translateAnimation);
+         //...
        ~~~
        * FrameAnimation (帧动画)
        ~~~xml
@@ -651,7 +652,7 @@
             AnimationDrawable drawable = (AnimationDrawable) mLoading.getBackground();
             drawable.start();
        ~~~
-       
+      
       * View Animation的特殊使用场景
         通过LayoutAnimation实现ViewGroup子元素出场动画效果
         1.定义LayoutAnimation
@@ -710,28 +711,28 @@
             controller.setOrder(LayoutAnimationController.ORDER_NORMAL);
             mLv.setLayoutAnimation(controller );
         ```
-        
+      
     * 2、属性动画
         * 核心类
         |   Java类           | 说明            |
         |    ----            | ----            |
-        |  ValueAnimator     | 动画执行类；核心 |      
-        |  ObjectAnimator    | 动画执行类       | 
-        |  TimeInterpolator  | 时间插值（插值器接口），控制动画变化率       | 
-        |  TypeEvaluator     | 类型估值（估值器接口），设置属性值计算方式，根据属性的 始 & 末值 和 插值 一起计算出当前时间的属性值      | 
-        |  AnimatorSet       | 动画集     | 
-        |  AnimatorInflater       | 加载属性动画的XML文件     | 
-             
+        |  ValueAnimator     | 动画执行类；核心 |
+        |  ObjectAnimator    | 动画执行类       |
+        |  TimeInterpolator  | 时间插值（插值器接口），控制动画变化率       |
+        |  TypeEvaluator     | 类型估值（估值器接口），设置属性值计算方式，根据属性的 始 & 末值 和 插值 一起计算出当前时间的属性值      |
+        |  AnimatorSet       | 动画集     |
+        |  AnimatorInflater       | 加载属性动画的XML文件     |
+        
         * 额外的类
         |   Java类                  | 说明            |
         |    ----                   | ----            |
-        |  LayoutTransition         | 布局动画，为布局的容器设置动画 |  
-        |  ViewPropertyAnimator     | 为View的动画操作提供一种更加便捷的用法 |  
-        |  PropertyValuesHolder     | 保存动画过程中所需要操作的属性和对应的值 |  
-        |  Keyframe                 | 控制每个时间段执行的动画距离 |  
-        |  AnimationListener        | AnimationUpdateListener |  
-        |  AnimatorListenerAdapter  | 动画事件的监听 |  
-                  	
+        |  LayoutTransition         | 布局动画，为布局的容器设置动画 |
+        |  ViewPropertyAnimator     | 为View的动画操作提供一种更加便捷的用法 |
+        |  PropertyValuesHolder     | 保存动画过程中所需要操作的属性和对应的值 |
+        |  Keyframe                 | 控制每个时间段执行的动画距离 |
+        |  AnimationListener        | AnimationUpdateListener |
+        |  AnimatorListenerAdapter  | 动画事件的监听 |
+        
         * 具体使用
         1.`ofInt`
           ~~~android
@@ -772,7 +773,7 @@
           });
           //启动动画
           animator.start();
-          ~~~   	
+          ~~~
           ~~~xml
                 // ValueAnimator采用<animator>  标签
                 <animator xmlns:android="http://schemas.android.com/apk/res/android"
@@ -795,14 +796,16 @@
             // 启动动画
           ~~~
           
+        
          2.`ofFloat`与 `ofInt` 一样，返回值不一样
-         
+        
          3.`ofObject()`
-            ~~~android
+        
+          ~~~android
+          
             // 创建初始动画的对象  & 结束动画的对象
             Point point1 = new Point ();  
             Point point2 = new Point ();  
-            
             // 创建动画对象 & 设置参数
             ValueAnimator anim = ValueAnimator.ofObject(new myObjectEvaluator(), point1 , point2 );  
             // 参数说明
@@ -811,8 +814,171 @@
             // 3. 结束动画的对象
             anim.setDuration(length);  
             anim.start();
+          ~~~
+        
+          4.ObjectAnimator
+        |   属性             | 作用             |   数值类型      |
+        |    ----            | ----            | ----            |
+        |  alpha             | 透明度          |        float    |
+        |  translationX      | X方向的位移     |        float    |
+        |  translationY      | Y方向的位移      |        float    |
+        |  scaleX            | X方向的缩放倍数  |        float    |
+        |  scaleY           | Y方向的缩放倍数   |        float    |
+        |  rotation         | 以屏幕方向为轴的旋转度数 |  float    |
+        |  rotationX         | 以X轴为轴的旋转度数 |  float    |
+        |  rotationY         | 以Y轴为轴的旋转度数 |  float    |
+        
+        
+           ~~~android
+            ObjectAnimator animator = ObjectAnimator.ofFloat(Object object, String property, float ....values);  
+            //ObjectAnimator animator = ObjectAnimator.ofInt(Object object, String property, int ....values);  
+            //ObjectAnimator animator = ObjectAnimator.ofObject(Object object, String property, TypeEvaluator evaluator,Object....values);  
+            
+            // 以ofFloat为例 参数说明：
+            // Object object：需要操作的对象
+            // String property：需要操作的对象的属性
+            // float ....values：动画初始值 & 结束值（不固定长度）
+            // 若是两个参数a,b，则动画效果则是从属性的a值到b值
+            // 若是三个参数a,b,c，则则动画效果则是从属性的a值到b值再到c值
+            // 以此类推
+            // 至于如何从初始值 过渡到 结束值，同样是由估值器决定，此处ObjectAnimator.ofFloat（）是有系统内置的浮点型估值器FloatEvaluator，同ValueAnimator讲解
+            
+            //动画基本属性
+            anim.setDuration(500); 
+            anim.setStartDelay(500);
+            anim.setRepeatCount(0);
+            anim.setRepeatMode(ValueAnimator.RESTART);
+            
+            animator.start();  
+           ~~~
+        
+           ~~~xml
+               <!--  ObjectAnimator 采用<objectAnimator >  标签 -->
+                <objectAnimator xmlns:android="http://schemas.android.com/apk/res/android"  
+                    android:valueFrom="1"   // 初始值
+                    android:valueTo="0"  // 结束值
+                    android:valueType="floatType"  // 变化值类型 ：floatType & intType
+                    android:propertyName="alpha" // 对象变化的属性名称
+                />
+           ~~~
+        
+           ~~~xml
+            Animator animator = AnimatorInflater.loadAnimator(context, R.animator.view_animation);  
+            // 载入XML动画
+            animator.setTarget(view);  
+            // 设置动画对象
+            animator.start();  
+            // 启动动画
+           ~~~
+           5.AnimatorSet 组合动画
+           * 使用
+        
+            ~~~android
+                AnimatorSet.play(Animator anim)   ：播放当前动画
+                AnimatorSet.after(long delay)   ：将现有动画延迟x毫秒后执行
+                AnimatorSet.with(Animator anim)   ：将现有动画和传入的动画同时执行
+                AnimatorSet.after(Animator anim)   ：将现有动画插入到传入的动画之后执行
+                AnimatorSet.before(Animator anim) ：  将现有动画插入到传入的动画之前执行
             ~~~
-    
+           * 实例
+        
+            ~~~android 
+                ObjectAnimator a1 = ObjectAnimator.ofFloat(view, "alpha", 1.0f, 0f);  
+                ObjectAnimator a2 = ObjectAnimator.ofFloat(view, "translationY", 0f, viewWidth);  
+                ......
+                AnimatorSet animSet = new AnimatorSet();  
+                animSet.setDuration(5000);  
+                animSet.setInterpolator(new LinearInterpolator());   
+                //animSet.playTogether(a1, a2, ...); //两个动画同时执行  
+                animSet.play(a1).after(a2); //先后执行
+                ......//其他组合方式
+                animSet.start();  
+            ~~~
+           * xml方式
+        
+            ~~~xml
+                <set
+                  android:ordering=["together" | "sequentially"]>
+                
+                    <objectAnimator
+                        android:propertyName="string"
+                        android:duration="int"
+                        android:valueFrom="float | int | color"
+                        android:valueTo="float | int | color"
+                        android:startOffset="int"
+                        android:repeatCount="int"
+                        android:repeatMode=["repeat" | "reverse"]
+                        android:valueType=["intType" | "floatType"]/>
+                
+                    <animator
+                        android:duration="int"
+                        android:valueFrom="float | int | color"
+                        android:valueTo="float | int | color"
+                        android:startOffset="int"
+                        android:repeatCount="int"
+                        android:repeatMode=["repeat" | "reverse"]
+                        android:valueType=["intType" | "floatType"]/>
+                
+                    <set>
+                        ...
+                    </set>
+                </set>
+            ~~~
+           * 监听动画
+        
+            ~~~android
+                anim.addListener(new AnimatorListener() {
+                          @Override
+                          public void onAnimationStart(Animation animation) {
+                              //动画开始时执行
+                          }
+                      
+                           @Override
+                          public void onAnimationRepeat(Animation animation) {
+                              //动画重复时执行
+                          }
+                
+                         @Override
+                          public void onAnimationCancel()(Animation animation) {
+                              //动画取消时执行
+                          }
+                    
+                          @Override
+                          public void onAnimationEnd(Animation animation) {
+                              //动画结束时执行
+                          }
+                      });
+            ~~~
+        
+           
+        
+        
+           6.ViewPropertyAnimator
+           ~~~android
+                    // 使用解析
+                    View.animate().xxx().xxx();
+                    // ViewPropertyAnimator的功能建立在animate()上
+                    // 调用animate()方法返回值是一个ViewPropertyAnimator对象,之后的调用的所有方法都是通过该实例完成
+                    // 调用该实例的各种方法来实现动画效果
+                    // ViewPropertyAnimator所有接口方法都使用连缀语法来设计，每个方法的返回值都是它自身的实例
+                    // 因此调用完一个方法后可直接连缀调用另一方法,即可通过一行代码就完成所有动画效果
+                    
+                    // 以下是例子
+                    mButton = (Button) findViewById(R.id.Button);
+                    // 创建动画作用对象：此处以Button为例
+            
+                    mButton.animate().alpha(0f);
+                    // 单个动画设置:将按钮变成透明状态 
+                    mButton.animate().alpha(0f).setDuration(5000).setInterpolator(new BounceInterpolator());
+                    // 单个动画效果设置 & 参数设置 
+                    mButton.animate().alpha(0f).x(500).y(500);
+                    // 组合动画:将按钮变成透明状态再移动到(500,500)处
+                    
+                    // 特别注意:
+                    // 动画自动启动,无需调用start()方法.因为新的接口中使用了隐式启动动画的功能，只要我们将动画定义完成后，动画就会自动启动
+                    // 该机制对于组合动画也同样有效，只要不断地连缀新的方法，那么动画就不会立刻执行，等到所有在ViewPropertyAnimator上设置的方法都执行完毕后，动画就会自动启动
+                    // 如果不想使用这一默认机制，也可以显式地调用start()方法来启动动画
+           ~~~
     
 * 2、属性动画的原理分析
 * 3、插值器
