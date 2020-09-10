@@ -12,6 +12,7 @@ import com.soul.androidcontent.customview.anim.IAnimal;
 import com.soul.androidcontent.customview.anim.PropertyObjectAnimator;
 import com.soul.androidcontent.customview.anim.PropertyValueAnimator;
 import com.soul.androidcontent.customview.anim.TweenAnimation;
+import com.soul.androidcontent.customview.anim.objectanimator.CustomPropertyObjectAnimator;
 import com.soul.lib.test.ButtonTextFragment;
 
 /**
@@ -40,6 +41,7 @@ public class AnimTestFragment extends ButtonTextFragment implements View.OnClick
         addTextName("帧动画", this);
         addTextName("属性动画-value", this);
         addTextName("属性动画-object", this);
+        addTextName("自定义属性动画", this);
 
         Context context = getContext();
         if (context != null) {
@@ -83,7 +85,9 @@ public class AnimTestFragment extends ButtonTextFragment implements View.OnClick
                 break;
             case "属性动画-object":
                 mIAnimal = new PropertyObjectAnimator(mImageView);
-
+                break;
+            case "自定义属性动画":
+                mIAnimal = new CustomPropertyObjectAnimator(mImageView);
                 break;
             default:
                 mIAnimal = null;

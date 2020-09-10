@@ -79,7 +79,7 @@ public abstract class ButtonTextFragment extends Fragment implements IButtonText
     @Override
     public void addView(View view) {
         View childAt = mLlRootView.getChildAt(mLlRootView.getChildCount() - 1);
-        if (VIEW_TAG.equals(childAt.getTag())) {
+        if (childAt != null && VIEW_TAG.equals(childAt.getTag())) {
             mLlRootView.removeView(childAt);
         }
 

@@ -981,17 +981,21 @@
            ~~~
     
 * 2、属性动画的原理分析
+
+    
 * 3、插值器
-    > Interpolator对象	资源id	功能作用
-      AccelerateDecelerateInterpolator	@android:anim/accelerate_ decelerate_interpolator	先加速再减速
-      AccelerateInterpolator	@android:anim/accelerate_ interpolator	加速
-      AnticipateInterpolator	@android:anim/anticipate_ interpolator	先回退一小步然后加速前进
-      AnticipateOvershootInterpolator	@android:anim/anticipate_ overshoot_interpolator	在上一个基础上超出终点一小步再回到终点
-      BounceInterpolator	@android:anim/bounce_ interpolator	最后阶段弹球效果
-      CycleInterpolator	@android:anim/cycle_interpolator	周期运动
-      DecelerateInterpolator	@android:anim/decelerate_ interpolator	减速
-      LinearInterpolator	@android:anim/linear_interpolator	匀速
-      OvershootInterpolator	@android:anim/overshoot_ interpolator	快速到达终点并超出一小步最后回到终点
+            |   Interpolator对象                    | 资源id                                            |   功能作用         |
+            |    ----                               | ----                                              | ----              |
+            |    AccelerateDecelerateInterpolator   | @android:anim/accelerate_ decelerate_interpolator | 先加速再减速       |
+            |    AccelerateInterpolator             | @android:anim/accelerate_ interpolator            | 加速       |
+            |    AnticipateInterpolator             | @android:anim/anticipate_ interpolator            | 先回退一小步然后加速前进  |
+            |    AnticipateOvershootInterpolator    | @android:anim/anticipate_ overshoot_interpolator  | 在上一个基础上超出终点一小步再回到终点  |
+            |    BounceInterpolator                 | @android:anim/bounce_ interpolator                | 最后阶段弹球效果  |
+            |    CycleInterpolator                  | @android:anim/cycle_interpolator                  | 周期运动  |
+            |    DecelerateInterpolator             | @android:anim/decelerate_ interpolator            | 减速  |
+            |    LinearInterpolator                 | @android:anim/linear_interpolator                 | 匀速  |
+            |    OvershootInterpolator              | @android:anim/interpolator                        | 快速到达终点并超出一小步最后回到终点  |
+
 
 * 4、滑动
 

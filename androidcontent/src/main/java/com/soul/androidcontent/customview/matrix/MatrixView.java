@@ -192,14 +192,14 @@ public class MatrixView extends View {
         //        rapRadius();
 
         /**------------------------------mapRectF--------------------------------*/
-        //        rapRectF();
+                rapRectF(canvas);
         /**------------------------------mapVectors--------------------------------*/
         //mapVectors 与 mapPoints 基本上是相同的，可以直接参照上面的mapPoints使用方法。
         //        mapVectors();
 
         /**------------------------------setPolyToPoly--------------------------------*/
         //        setPolyToPoly(canvas);
-        setRectToRect(canvas);
+//        setRectToRect(canvas);
 
     }
 
@@ -234,17 +234,17 @@ public class MatrixView extends View {
 
     }
 
-    private void rapRectF() {
+    private void rapRectF(Canvas canvas) {
         RectF rectF = new RectF(400, 400, 1000, 800);
         //构造一个matrix
         Matrix matrix = new Matrix();
-        matrix.setScale(0.5f, 1f);
+//        matrix.setScale(0.5f, 1f);
         matrix.postSkew(1, 0);
 
         Log.i("Tag", rectF.toString());
         boolean result = matrix.mapRect(rectF);
         Log.i("Tag", "mapRadius:" + rectF.toString());
-
+        canvas.drawBitmap(mBitmap,matrix,new Paint());
         Log.i("Tag", "isRect:" + result);
     }
 
