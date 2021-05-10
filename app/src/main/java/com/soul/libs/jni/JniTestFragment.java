@@ -4,7 +4,6 @@ import android.util.Log;
 import android.view.View;
 
 import com.soul.lib.test.ButtonTextFragment;
-import com.soul.nativelibrary.JniTest;
 
 /**
  * Description: jni 测试类
@@ -34,14 +33,14 @@ public class JniTestFragment extends ButtonTextFragment implements View.OnClickL
         String tag = (String) v.getTag();
         switch (tag) {
             case "demo测试":
-                String s = JniTest.testDemo();
-                Log.i("Tag", "测试数据:" + s);
+//                String s = JniTest.testDemo();
+//                Log.i("Tag", "测试数据:" + s);
                 break;
             case "启动服务端":
-                new Thread(JniTest::startUPDServer).start();
+//                new Thread(JniTest::startUPDServer).start();
                 break;
             case "客户端发送数据":
-                JniTest.sendClientData("123456");
+//                JniTest.sendClientData("123456");
                 break;
             case "c层获取java类String数据":
                 CallJavaTest test = new CallJavaTest();

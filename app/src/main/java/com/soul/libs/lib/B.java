@@ -9,9 +9,11 @@ package com.soul.libs.lib;
  * UpdateRemark:
  */
 public class B extends A {
+
     static {
         System.out.println("state B");
     }
+
     {
         System.out.println("B");
     }

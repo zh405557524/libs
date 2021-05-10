@@ -30,5 +30,5 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     implementation project(path: ':javalib')
     implementation project(path: ':frame')
-    implementation project(path: ':nativelibrary')
+//    implementation project(path: ':nativelibrary')
 }

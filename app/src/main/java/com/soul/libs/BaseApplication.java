@@ -19,5 +19,7 @@ public class BaseApplication extends Application {
         super.onCreate();
         AppInstanceBase appInstanceBase = new AppInstanceBase();
         appInstanceBase.onCreate(this);
+
+
     }
 }
