@@ -1,6 +1,10 @@
 package com.soul.lib.module.bluetooth;
 
+import android.app.Activity;
+import android.bluetooth.BluetoothDevice;
 import android.content.Context;
+
+import java.util.List;
 
 /**
  * Description: 蓝牙接口
@@ -10,7 +14,7 @@ import android.content.Context;
  * UpdateDate: 2021/5/10 10:27
  * UpdateRemark:
  */
-public interface IBluetoothManager {
+public interface IBluetoothBleManager {
 
 
     /**
@@ -23,44 +27,31 @@ public interface IBluetoothManager {
     /**
      * 打开蓝牙设置
      */
-    void openSetting();
+    void openSetting(Activity activity);
 
     /**
      * 搜索蓝牙设备
      */
-    void searchDevice(Context context);
+    void searchDevice( );
 
     /**
      * 获取蓝牙信息
      */
-    void getDeviceInfo();
-
-    /**
-     * 选中设备
-     */
-    void chooseDevice();
-
-    /**
-     * 是否匹配
-     *
-     * @return true 已匹配; false 未匹配
-     */
-    boolean isMatch();
-
-    /**
-     * 进行蓝牙匹配
-     */
-    void matching();
+    List<BluetoothDevice> getDeviceInfo();
 
     /**
      * 进行蓝牙连接
+     *
+     * @param bluetoothDevice 蓝牙设备
      */
-    void connect();
+    void connect(Context context, BluetoothDevice bluetoothDevice);
 
     /**
      * 发送数据
      */
     void sendData();
+
+    void disConnect();
 
 
 }

@@ -50,7 +50,7 @@ public class OKHttpAnalyze {
 
             }
         });
-
+        call.cancel();
 
     }
 
