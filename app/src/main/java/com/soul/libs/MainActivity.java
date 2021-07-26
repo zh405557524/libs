@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.tv_lib).setOnClickListener(this);
         findViewById(R.id.tv_frame).setOnClickListener(this);
         findViewById(R.id.tv_jni).setOnClickListener(this);
-
+        findViewById(R.id.tv_bluetooth).setOnClickListener(this);
 
 
     }
@@ -45,6 +45,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.tv_jni: {
                 final Intent intent = new Intent(MainActivity.this, TestActivity.class);
                 intent.putExtra("pageName", "com.soul.libs.jni");
+                startActivity(intent);
+            }
+            case R.id.tv_bluetooth: {
+                final Intent intent = new Intent(MainActivity.this, TestActivity.class);
+                intent.putExtra("pageName", "com.soul.libs.bluetooth");
                 startActivity(intent);
             }
             break;

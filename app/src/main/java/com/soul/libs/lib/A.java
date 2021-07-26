@@ -9,6 +9,9 @@ package com.soul.libs.lib;
  * UpdateRemark:
  */
 public class A {
+
+    public static int id = 100;
+
     {
         System.out.println("A");
     }
@@ -19,5 +22,6 @@ public class A {
 
     public A() {
         System.out.println("hello A");
+        System.out.println("id:"+id);
     }
 }

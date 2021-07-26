@@ -1,4 +1,4 @@
-package com.soul.lib.module.bluetooth;
+package com.soul.lib.module.bluetooth.ble;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
@@ -6,7 +6,6 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCallback;
 import android.bluetooth.BluetoothGattCharacteristic;
-import android.bluetooth.BluetoothGattDescriptor;
 import android.bluetooth.BluetoothGattService;
 import android.content.Context;
 import android.content.Intent;
@@ -128,8 +127,10 @@ public class BluetoothBleManager implements IBluetoothBleManager {
             Log.e(TAG, "bluetoothDevice is null");
             return;
         }
+        disConnect();
         mBluetoothGatt = bluetoothDevice.connectGatt(context, false, mBluetoothGattCallback);
     }
+
 
     @Override
     public void sendData() {
@@ -159,8 +160,10 @@ public class BluetoothBleManager implements IBluetoothBleManager {
 
         /**
          * 已成功连接蓝牙设备
+         *
+         * @param bluetoothGatt 蓝牙描述符
          */
-        void onConnected();
+        void onConnected(BluetoothGatt bluetoothGatt);
 
         /**
          * 连接断开
@@ -173,6 +176,14 @@ public class BluetoothBleManager implements IBluetoothBleManager {
          * @param services 蓝牙服务
          */
         void onServices(List<BluetoothGattService> services);
+
+        /**
+         * 蓝牙特征回调
+         *
+         * @param gatt
+         * @param characteristic
+         */
+        void onCharacteristicChanged(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic);
     }
 
 
@@ -226,7 +237,7 @@ public class BluetoothBleManager implements IBluetoothBleManager {
                     mBluetoothGatt.discoverServices();
                     LogUtils.i(TAG, "已连接");
                     if (mOnBluetoothConnectListener != null) {
-                        mOnBluetoothConnectListener.onConnected();
+                        mOnBluetoothConnectListener.onConnected(mBluetoothGatt);
                     }
                     break;
                 }
@@ -250,11 +261,11 @@ public class BluetoothBleManager implements IBluetoothBleManager {
             if (status == BluetoothGatt.GATT_SUCCESS) {
                 //获取服务列表
                 List<BluetoothGattService> services = mBluetoothGatt.getServices();
-
+                LogUtils.i(TAG, "获取服务成功");
                 if (mOnBluetoothConnectListener != null) {
                     mOnBluetoothConnectListener.onServices(services);
                 }
-                LogUtils.i(TAG, "获取服务成功");
+
 
             }
         }
@@ -268,22 +279,28 @@ public class BluetoothBleManager implements IBluetoothBleManager {
         @Override
         public void onCharacteristicWrite(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
             super.onCharacteristicWrite(gatt, characteristic, status);
+            LogUtils.i(TAG, "onCharacteristicWrite");
             if (status == BluetoothGatt.GATT_SUCCESS) {
                 LogUtils.i(TAG, "发送成功");
+                onCharacteristicChanged(gatt, characteristic);
             }
 
         }
 
         @Override
-        public void onDescriptorWrite(BluetoothGatt gatt, BluetoothGattDescriptor descriptor, int status) {
-
-
+        public void onCharacteristicRead(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
+            super.onCharacteristicRead(gatt, characteristic, status);
+            if (status == BluetoothGatt.GATT_SUCCESS) {
+                LogUtils.i(TAG, "收到回调");
+                onCharacteristicChanged(gatt, characteristic);
+            }
         }
-
 
         @Override
         public void onCharacteristicChanged(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic) {
-
+            if (mOnBluetoothConnectListener != null) {
+                mOnBluetoothConnectListener.onCharacteristicChanged(gatt, characteristic);
+            }
         }
     };
 

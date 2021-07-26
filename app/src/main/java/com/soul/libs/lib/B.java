@@ -9,6 +9,8 @@ package com.soul.libs.lib;
  * UpdateRemark:
  */
 public class B extends A {
+    public static int id = 101;
+
 
     static {
         System.out.println("state B");
@@ -20,5 +22,6 @@ public class B extends A {
 
     public B() {
         System.out.println("hello B");
+        System.out.println("id:" + id);
     }
 }

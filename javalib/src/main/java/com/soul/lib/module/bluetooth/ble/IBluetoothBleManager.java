@@ -1,4 +1,4 @@
-package com.soul.lib.module.bluetooth;
+package com.soul.lib.module.bluetooth.ble;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothDevice;
