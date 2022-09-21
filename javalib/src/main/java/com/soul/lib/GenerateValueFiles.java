@@ -6,7 +6,7 @@ import java.io.FileOutputStream;
 import java.io.PrintWriter;
 
 /**
- * Description: TODO
+ * Description: 屏幕适配 px
  * Author: 祝明
  * CreateDate: 2020/12/30 16:20
  * UpdateUser:

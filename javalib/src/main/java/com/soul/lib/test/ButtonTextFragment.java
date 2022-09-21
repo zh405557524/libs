@@ -88,7 +88,7 @@ public abstract class ButtonTextFragment extends Fragment implements IButtonText
             layoutParams = new LinearLayout.LayoutParams(
                     ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT);
         }
-        view.setTag(VIEW_TAG);
+//        view.setTag(VIEW_TAG);
         layoutParams.height = layoutParams.height <= 0 ? ScreenUtils.getScreenHeight() : layoutParams.height;
         layoutParams.width = layoutParams.width <= 0 ? ScreenUtils.getScreenWidth() : layoutParams.width;
         Log.i(TAG, "height:" + layoutParams.height + "    width:" + layoutParams.width);

@@ -5,7 +5,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.HandlerThread;
 
-import com.soul.lib.utils.AppUtil;
+import com.soul.lib.utils.AppUtils;
 import com.soul.lib.utils.UIUtils;
 
 
@@ -55,11 +55,11 @@ public class AppInstanceBase {
     }
 
     public boolean isMainProcess() {
-        return AppUtil.isMainProcess(mContext);
+        return AppUtils.isMainProcess(mContext);
     }
 
     public String getProcessName() {
-        return AppUtil.getProcessName(mContext, android.os.Process.myPid());
+        return AppUtils.getProcessName(mContext, android.os.Process.myPid());
     }
 
 }

@@ -1,10 +1,19 @@
 package com.soul.libs.lib;
 
+import android.annotation.SuppressLint;
+import android.app.ActivityManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.soul.lib.test.ButtonTextFragment;
+import com.soul.lib.utils.AppUtils;
+import com.soul.lib.utils.LogUtils;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import static android.content.Context.ACTIVITY_SERVICE;
 
 /**
  * @描述：TODO
@@ -29,11 +38,12 @@ public class AppTestFragment extends ButtonTextFragment implements View.OnClickL
         addTextName("静默卸载App", this);
         addTextName("判断App是否有root权限", this);
         addTextName("打开App", this);
+        addTextName("关闭App", this);
         addTextName("获取App包名", this);
         addTextName("获取App具体设置", this);
 
 
-        TextView context ;
+        TextView context;
         context = null;
         TextView context1 = context;
         context = new TextView(getContext());
@@ -52,6 +62,24 @@ public class AppTestFragment extends ButtonTextFragment implements View.OnClickL
         String tag = (String) view.getTag();
         switch (tag) {
             case "判断App是否安装":
+                break;
+            case "打开App":
+                Date date = new Date();
+                LogUtils.i("时间time为：" + date.toLocaleString());
+                @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+                String format = sdf.format(date);
+                LogUtils.i("时间time为：" + format);
+                if ("11:22".equals(format)) {
+                    AppUtils.startAppByName(mRootView.getContext(), "钉钉");
+                }
+                break;
+            case "关闭app":
+                try {
+                    ActivityManager m = (ActivityManager) getContext().getSystemService(ACTIVITY_SERVICE);
+                    m.killBackgroundProcesses("com.alibaba.android.rimet");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 break;
         }
     }

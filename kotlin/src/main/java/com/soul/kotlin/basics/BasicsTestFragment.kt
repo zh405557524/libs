@@ -22,6 +22,7 @@ public class BasicsTestFragment : ButtonTextFragment(), View.OnClickListener {
     override fun initEvent() {
         addTextName("基础语法", this)
         addTextName("基本数据类型", this)
+        addTextName("控制语句", this)
     }
 
 
@@ -33,6 +34,9 @@ public class BasicsTestFragment : ButtonTextFragment(), View.OnClickListener {
             }
 
             "基本数据类型" -> {
+                DataType().main(null)
+            }
+            "控制语句" -> {
                 DataType().main(null)
             }
         }
