@@ -2,6 +2,7 @@ package com.soul.kotlin.basics
 
 import android.util.Log
 import android.view.View
+import com.soul.kotlin.basics.basices.Control
 import com.soul.kotlin.basics.basices.DataType
 import com.soul.kotlin.basics.basices.Grammar
 import com.soul.kotlin.basics.classz.Student
@@ -44,7 +45,7 @@ public class BasicsTestFragment : ButtonTextFragment(), View.OnClickListener {
         when (v?.getTag()) {
             "基础语法" -> Grammar().main(null)
             "基本数据类型" -> DataType().main(null)
-            "控制语句" -> DataType().main(null)
+            "控制语句" -> Control().main()
             "集合测试类" -> list()
             "Lambda 表达式测试类" -> lambda()
             "Java函数式API的使用" -> functionApi()

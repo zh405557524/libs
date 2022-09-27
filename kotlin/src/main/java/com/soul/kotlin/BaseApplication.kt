@@ -12,7 +12,7 @@ import com.soul.lib.base.AppInstanceBase
  * UpdateDate: 2020/6/28 20:00
  * UpdateRemark:
  */
-public class BaseApplication : Application() {
+ class BaseApplication : Application() {
 
 
     override fun onCreate() {
