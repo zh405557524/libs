@@ -14,6 +14,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         findViewById<TextView>(R.id.tv_kotlinBasics).setOnClickListener(this)
+        findViewById<TextView>(R.id.tv_kotlinAdvance).setOnClickListener(this)
     }
 
 
@@ -21,6 +22,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         when (v?.id) {
             R.id.tv_kotlinBasics -> {
                 startTextFragment("com.soul.kotlin.basics")
+            }
+            R.id.tv_kotlinAdvance -> {
+                startTextFragment("com.soul.kotlin.advance")
             }
         }
     }
