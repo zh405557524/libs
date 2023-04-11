@@ -1,4 +1,4 @@
-package com.soul.libs.lib;
+package com.soul.libs.lib.test;
 
 import android.content.Context;
 import android.media.AudioManager;

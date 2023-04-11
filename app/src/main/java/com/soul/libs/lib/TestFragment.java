@@ -7,6 +7,8 @@ import android.view.View;
 import com.soul.lib.test.ButtonTextFragment;
 import com.soul.lib.utils.LogUtils;
 import com.soul.lib.utils.NetworkUtils;
+import com.soul.libs.lib.test.B;
+import com.soul.libs.lib.test.SystemManager;
 
 /**
  * Description: TODO

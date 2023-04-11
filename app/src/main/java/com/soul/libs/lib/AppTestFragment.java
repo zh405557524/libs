@@ -16,7 +16,7 @@ import java.util.Date;
 import static android.content.Context.ACTIVITY_SERVICE;
 
 /**
- * @描述：TODO
+ * @描述：App相关工具类
  * @作者：祝明
  * @项目名:libs
  * @创建时间：2019/10/21 20:13
