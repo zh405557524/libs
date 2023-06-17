@@ -3,6 +3,7 @@ package com.soul.kotlin.advance
 import android.view.View
 import com.soul.lib.test.ButtonTextFragment
 import com.soul.lib.utils.LogUtils
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -22,6 +23,7 @@ class CoroutineTestFragment : ButtonTextFragment(), View.OnClickListener {
 
     override fun initEvent() {
         addTextName("launch ", this)
+        addTextName("launch ", this)
     }
 
     override fun onClick(v: View?) {
@@ -31,12 +33,11 @@ class CoroutineTestFragment : ButtonTextFragment(), View.OnClickListener {
     }
 
     private fun launch() {
-        GlobalScope.launch {
-            LogUtils.i(TAG, "launch 1")
-        }
-
-        GlobalScope.launch {
-            LogUtils.i(TAG, "launch 2")
+        for (i in 0 until 100) {
+            GlobalScope.launch(IO) {
+                LogUtils.i(TAG, "launch 1$i")
+            }
         }
     }
+
 }

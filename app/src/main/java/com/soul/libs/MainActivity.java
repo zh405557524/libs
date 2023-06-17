@@ -23,6 +23,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.tv_jni).setOnClickListener(this);
         findViewById(R.id.tv_bluetooth).setOnClickListener(this);
 
+        RotatingImageView rotatingImageView = findViewById(R.id.RotatingImageView);
+        rotatingImageView.startRotating();
 
     }
 
