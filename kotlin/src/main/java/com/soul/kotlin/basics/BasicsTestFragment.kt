@@ -130,17 +130,17 @@ public class BasicsTestFragment : ButtonTextFragment(), View.OnClickListener {
     private fun lambda() {
         val list = listOf<String>("a", "adb", "aabb", "a")
         val lambda = { str: String -> str.length }
-        var maxStr = list.maxBy(lambda)
-        Log.i(TAG, "maxStr:" + maxStr)
-        maxStr = list.maxBy({ str: String -> str.length })
-        Log.i(TAG, "maxStr:" + maxStr)
-        maxStr = list.maxBy() { str: String -> str.length }
-        maxStr = list.maxBy { str: String -> str.length }
-        Log.i(TAG, "maxStr:" + maxStr)
-        maxStr = list.maxBy { str -> str.length }
-        Log.i(TAG, "maxStr:" + maxStr)
-        maxStr = list.maxBy { it.length }
-        Log.i(TAG, "maxStr:" + maxStr)
+//        var maxStr = list.maxBy(lambda)
+//        Log.i(TAG, "maxStr:" + maxStr)
+//        maxStr = list.maxBy({ str: String -> str.length })
+//        Log.i(TAG, "maxStr:" + maxStr)
+//        maxStr = list.maxBy() { str: String -> str.length }
+//        maxStr = list.maxBy { str: String -> str.length }
+//        Log.i(TAG, "maxStr:" + maxStr)
+//        maxStr = list.maxBy { str -> str.length }
+//        Log.i(TAG, "maxStr:" + maxStr)
+//        maxStr = list.maxBy { it.length }
+//        Log.i(TAG, "maxStr:" + maxStr)
         val newList = list.map { it.toUpperCase() } //将集合中的元素都准换成大写
         val newList1 = list.filter { it.length > 3 } //筛选出长度大于3的元素
         val isAny = list.any { it.length > 10 }//返回false
