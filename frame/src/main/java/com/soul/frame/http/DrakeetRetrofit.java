@@ -2,9 +2,7 @@ package com.soul.frame.http;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.soul.lib.base.Global;
 import com.soul.lib.utils.NetworkUtils;
-import com.soul.lib.utils.UIUtils;
 
 import java.io.IOException;
 import java.io.InputStream;

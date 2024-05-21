@@ -7,8 +7,8 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
+import com.soul.lib.Global;
 import com.soul.lib.R;
-import com.soul.lib.utils.UIUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +51,7 @@ public class TestActivity extends AppCompatActivity {
                 } else {
                     strings = FragmentFactory.initFragmentCount(TestActivity.this);
                 }
-                UIUtils.getMainThreadHandler().post(new Runnable() {
+                Global.getMainThreadHandler().post(new Runnable() {
                     @Override
                     public void run() {
                         final Bundle bundle = new Bundle();

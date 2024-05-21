@@ -4,7 +4,7 @@ import android.content.Context;
 import android.media.AudioManager;
 
 
-import com.soul.lib.base.Global;
+import com.soul.lib.Global;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -90,9 +90,9 @@ public class SystemManager implements ISystemManger {
     @Override
     public void abandonAudioFocus(long millis) {
         if (abandonAudioFocusTask != null) {
-            Global.getUiHandler().removeCallbacks(abandonAudioFocusTask);
+            Global.getMainThreadHandler().removeCallbacks(abandonAudioFocusTask);
         }
-        Global.postUiTaskDelayed(abandonAudioFocusTask, millis);
+        Global.postDelayedTaskSafely(abandonAudioFocusTask, millis);
     }
 
     @Override

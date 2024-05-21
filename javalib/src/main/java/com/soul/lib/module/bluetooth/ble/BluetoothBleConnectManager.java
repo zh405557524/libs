@@ -11,8 +11,8 @@ import android.os.HandlerThread;
 import android.os.Message;
 import android.util.Log;
 
+import com.soul.lib.Global;
 import com.soul.lib.utils.LogUtils;
-import com.soul.lib.utils.UIUtils;
 
 import java.util.List;
 
@@ -303,7 +303,7 @@ public class BluetoothBleConnectManager implements IBluetoothBleConnectManager, 
         @Override
         public void run() {
             LogUtils.i(TAG, "execute connectTask");
-            BluetoothBleManager.getInstance().connect(UIUtils.getContext(), currentDevice);
+            BluetoothBleManager.getInstance().connect(Global.getContext(), currentDevice);
             //2分钟之内 如果无法连接成功，则重新连接
             mHandler.postDelayed(connectTask, 1000 * 10);
         }

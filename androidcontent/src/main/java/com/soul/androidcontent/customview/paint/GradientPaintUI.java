@@ -16,9 +16,9 @@ import android.graphics.SweepGradient;
 
 import com.soul.androidcontent.R;
 import com.soul.androidcontent.customview.CustomUI;
+import com.soul.lib.Global;
 import com.soul.lib.utils.LogUtils;
 
-import static com.soul.lib.utils.UIUtils.getResources;
 
 /**
  * Description: Paint API 集合
@@ -78,7 +78,7 @@ public class GradientPaintUI implements CustomUI {
 
     public GradientPaintUI() {
         //获取bitmap
-        mBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.girl);
+        mBitmap = BitmapFactory.decodeResource(Global.getResources(), R.drawable.girl);
         //创建画笔
         mPaint = new Paint();
         //1、设置颜色

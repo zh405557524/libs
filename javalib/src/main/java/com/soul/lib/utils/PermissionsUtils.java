@@ -3,6 +3,8 @@ package com.soul.lib.utils;
 import android.app.Activity;
 import android.content.pm.PackageManager;
 
+import com.soul.lib.Global;
+
 import java.util.ArrayList;
 
 import androidx.core.app.ActivityCompat;
@@ -36,7 +38,7 @@ public class PermissionsUtils {
     }
 
     private static boolean lacksPermission(String permission) {
-        return ContextCompat.checkSelfPermission(UIUtils.getContext(), permission) == PackageManager.PERMISSION_DENIED;
+        return ContextCompat.checkSelfPermission(Global.getContext(), permission) == PackageManager.PERMISSION_DENIED;
     }
 
 

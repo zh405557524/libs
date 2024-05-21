@@ -2,8 +2,6 @@ package com.soul.androidcontent;
 
 import android.app.Application;
 
-import com.soul.lib.base.AppInstanceBase;
-
 /**
  * Description:
  * Author: 祝明

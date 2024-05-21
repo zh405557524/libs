@@ -3,6 +3,8 @@ package com.soul.lib.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.soul.lib.Global;
+
 import java.util.Map;
 
 /**
@@ -13,19 +15,20 @@ import java.util.Map;
  *     desc  : SP相关工具类
  * </pre>
  */
-public class SPUtils{
+public class SPUtils {
 
     private SharedPreferences sp;
     private SharedPreferences.Editor editor;
     /**
      * 保存在手机里面的文件名
      */
-    public static final String FILE_NAME ="123";
+    public static final String FILE_NAME = "123";
+
     /**
      * SPUtils构造函数
      * <p>在Application中初始化</p>
      *
-     * @param spName  spName
+     * @param spName spName
      */
     public SPUtils(String spName) {
         sp = Utils.getContext().getSharedPreferences(spName, Context.MODE_PRIVATE);
@@ -232,7 +235,7 @@ public class SPUtils{
      * @return
      */
     public static Object get(String key, Object defaultObject) {
-        SharedPreferences sp = UIUtils.getContext().getSharedPreferences(FILE_NAME,
+        SharedPreferences sp = Global.getContext().getSharedPreferences(FILE_NAME,
                 Context.MODE_PRIVATE);
 
         if (defaultObject instanceof String) {

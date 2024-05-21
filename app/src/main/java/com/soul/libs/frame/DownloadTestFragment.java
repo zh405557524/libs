@@ -4,7 +4,6 @@ import android.view.View;
 
 import com.soul.frame.download.DownloadManager;
 import com.soul.frame.download.DownloadProgressListener;
-import com.soul.lib.base.Global;
 import com.soul.lib.test.ButtonTextFragment;
 import com.soul.lib.utils.LogUtils;
 

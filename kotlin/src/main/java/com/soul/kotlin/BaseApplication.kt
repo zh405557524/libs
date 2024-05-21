@@ -1,7 +1,9 @@
 package com.soul.kotlin
 
 import android.app.Application
-import com.soul.lib.base.AppInstanceBase
+import android.os.Handler
+import android.os.HandlerThread
+import com.soul.lib.Global
 
 /**
  * Description: TODO
@@ -12,13 +14,9 @@ import com.soul.lib.base.AppInstanceBase
  * UpdateDate: 2020/6/28 20:00
  * UpdateRemark:
  */
- class BaseApplication : Application() {
-
-
+class BaseApplication : Application() {
     override fun onCreate() {
         super.onCreate()
-        val application: AppInstanceBase = AppInstanceBase()
-        application.onCreate(this)
-
+        Global.init(this)
     }
 }

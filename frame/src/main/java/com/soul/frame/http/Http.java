@@ -1,6 +1,5 @@
 package com.soul.frame.http;
 
-import com.soul.lib.base.Global;
 import com.soul.lib.utils.NetworkUtils;
 import com.soul.lib.utils.SPUtils;
 

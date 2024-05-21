@@ -5,7 +5,6 @@ import android.view.View;
 
 import com.soul.androidcontent.subassembly.activity.TestActivity;
 import com.soul.lib.test.ButtonTextFragment;
-import com.soul.lib.utils.UIUtils;
 
 /**
  * Description: Activity测试类
