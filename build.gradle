@@ -5,12 +5,13 @@ buildscript {
 
     repositories {
         google()
+        mavenCentral() // 或其他包含该插件的仓库
         jcenter()
         
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:8.3.0'
-        
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1' // Add this line
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version" }
@@ -19,6 +20,7 @@ buildscript {
 allprojects {
     repositories {
         google()
+        mavenCentral() // 或其他包含该插件的仓库
         jcenter()
         
     }
