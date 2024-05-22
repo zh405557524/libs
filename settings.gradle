@@ -1,2 +1,2 @@
-include ':app', ':javalib', ':frame', ':nativelibrary', ':androidcontent', ':kotlin'
+include ':app', ':javalib',
 rootProject.name='libs'
