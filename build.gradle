@@ -7,7 +7,7 @@ buildscript {
         google()
         mavenCentral() // 或其他包含该插件的仓库
         jcenter()
-        
+        maven { url 'https://jitpack.io' }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:7.4.2'
@@ -22,9 +22,10 @@ allprojects {
         google()
         mavenCentral() // 或其他包含该插件的仓库
         jcenter()
-        
+        maven { url 'https://jitpack.io' }
     }
 }
+
 
 task clean(type: Delete) {
     delete rootProject.buildDir
