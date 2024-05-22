@@ -11,8 +11,8 @@ android {
         applicationId "com.soul.libs"
         minSdkVersion 21
         targetSdkVersion 34
-        versionCode 1004
-        versionName "1.0.4"
+        versionCode 1005
+        versionName "1.0.5"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
