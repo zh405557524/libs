@@ -4,10 +4,10 @@ plugins {
 
 }
 group = 'com.github.${zh405557524}'
+
+
 android {
     compileSdk 34
-
-
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 34
@@ -29,7 +29,16 @@ android {
         targetCompatibility = 1.8
     }
     namespace 'com.soul.lib'
+}
 
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId = 'com.soul'
+            artifactId = 'lib'
+            version = '1.0.6'
+        }
+    }
 }
 
 dependencies {
