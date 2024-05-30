@@ -29,6 +29,29 @@ android {
         targetCompatibility = 1.8
     }
     namespace 'com.soul.lib'
+
+}
+
+def SDK_BASENAME = "comm"
+def sdkDestinationPath = "../qiwucomm/libs/"
+def zipFile = file('build/intermediates/packaged-classes/release/classes.jar')
+def date = new Date()
+//    def formattedDate = date.format('yyyyMMdd')
+task deleteBuild(type: Delete) {
+    delete sdkDestinationPath + SDK_BASENAME + ".jar"
+}
+task makeJar(type: Jar) {
+    from zipTree(zipFile)
+    from fileTree(dir: 'src/main', includes: ['assets/**']) // 打包assets目录下的所有文件
+//    baseName = SDK_BASENAME
+//    destinationDir = file(sdkDestinationPath)
+}
+makeJar.dependsOn(deleteBuild, build)
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
 }
 
 publishing {
@@ -36,7 +59,7 @@ publishing {
         release(MavenPublication) {
             groupId = 'com.soul'
             artifactId = 'lib'
-            version = '1.0.7'
+            version = '1.0.9'
         }
     }
 }

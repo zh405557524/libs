@@ -8,6 +8,7 @@ import android.os.Messenger;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.soul.lib.Global;
 import com.soul.lib.utils.FileHelp;
 
 import java.io.File;
@@ -99,6 +100,11 @@ public class LogManger implements ILogManger {
             }
         };
         mMessenger = new Messenger(mHandler);
+    }
+
+    @Override
+    public void init() {
+        init(Global.getExternalCacheDir() + "log/");
     }
 
     /**

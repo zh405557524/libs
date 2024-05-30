@@ -9,6 +9,7 @@ package com.soul.lib.module.log;
  * UpdateRemark:
  */
 public interface ILogManger {
+    void init();
 
     /**
      * 初始化log管理

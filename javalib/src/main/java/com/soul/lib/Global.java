@@ -12,6 +12,9 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
 
+import com.soul.lib.module.log.LogManger;
+import com.soul.lib.utils.LogUtil;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,11 +36,21 @@ public class Global {
     private static int sMainThreadId;
     private static Handler sHeavilyHandler;
 
-    public static void init(Application context) {
+    /**
+     * 初始化
+     *
+     * @param isDebug 是否是调试模式, true:打印日志,保持日志, false:不打印日志,不保存日志
+     */
+    public static void init(Application context, boolean isDebug) {
         Handler handler = new Handler();
         HandlerThread backgroundTask = new HandlerThread("background_task");
         backgroundTask.start();
         init(context, handler, new Handler(backgroundTask.getLooper()), 0);
+
+        LogUtil.sIsDebug = isDebug;
+        LogManger.getInstance().setConfig(isDebug);
+        LogManger.getInstance().init();
+        CrashHandler.getInstance().init(context);
     }
 
     public static void init(Application context, Handler handler, Handler bgHandler, int mainThreadId) {

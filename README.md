@@ -15,6 +15,10 @@
 
 ## 四、kotlin 下的常用UI组件封装
 
+编译指令
+ ./gradlew :javalib:assembleRelease
+
+
 
 
 

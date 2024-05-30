@@ -68,9 +68,12 @@ public class CrashHandler implements UncaughtExceptionHandler {
 
     public void init(Context context) {
         this.context = context;
-
+        File file = new File(Global.getExternalCacheDir() + "crash");
+        if (!file.exists()) {
+            boolean mkdirs = file.mkdirs();
+            LogUtil.i(TAG, "kdirs:" + mkdirs);
+        }
         mDefaultHandler = Thread.getDefaultUncaughtExceptionHandler();
-
         Thread.setDefaultUncaughtExceptionHandler(this);
     }
 
