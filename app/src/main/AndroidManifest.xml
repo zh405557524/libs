@@ -29,7 +29,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.soul.lib.test.TestActivity" />
+        <activity android:name="com.soul.libs.test.TestActivity" />
     </application>
 
 </manifest>

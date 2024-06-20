@@ -3,8 +3,7 @@ package com.soul.libs.frame;
 import android.view.View;
 
 import com.soul.lib.Global;
-import com.soul.lib.test.ButtonTextFragment;
-import com.soul.lib.utils.LogUtils;
+import com.soul.libs.test.ButtonTextFragment;
 
 import java.util.ArrayList;
 import java.util.List;

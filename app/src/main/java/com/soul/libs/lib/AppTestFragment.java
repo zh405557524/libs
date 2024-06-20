@@ -6,7 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.soul.lib.test.ButtonTextFragment;
+import com.soul.libs.test.ButtonTextFragment;
 import com.soul.lib.utils.AppUtils;
 import com.soul.lib.utils.LogUtils;
 

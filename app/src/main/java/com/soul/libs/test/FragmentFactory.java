@@ -1,4 +1,4 @@
-package com.soul.lib.test;
+package com.soul.libs.test;
 
 import android.content.Context;
 import android.util.Log;

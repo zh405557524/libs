@@ -4,7 +4,7 @@ import android.os.Build;
 import android.view.View;
 
 import com.soul.lib.module.bluetooth.BluetoothProcessorManager;
-import com.soul.lib.test.ButtonTextFragment;
+import com.soul.libs.test.ButtonTextFragment;
 
 import androidx.annotation.RequiresApi;
 

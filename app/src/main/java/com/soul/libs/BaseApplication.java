@@ -17,6 +17,6 @@ public class BaseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        Global.init(this);
+        Global.init(this,true);
     }
 }

@@ -1,9 +1,10 @@
-package com.soul.lib.test;
+package com.soul.libs.test;
 
 import android.app.Activity;
 import android.os.Bundle;
 
-import com.soul.lib.R;
+
+import com.soul.libs.R;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;

@@ -1,4 +1,4 @@
-package com.soul.lib.test;
+package com.soul.libs.test;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +8,7 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import com.soul.lib.Global;
-import com.soul.lib.R;
+import com.soul.libs.R;
 
 import java.util.ArrayList;
 import java.util.List;

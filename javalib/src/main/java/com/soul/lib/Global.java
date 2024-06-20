@@ -85,6 +85,10 @@ public class Global {
         return getContext().getResources();
     }
 
+    public static float getDimension(int resId) {
+        return getResources().getDimension(resId);
+    }
+
     /**
      * 得到string.xml中的一个字符串
      */

@@ -4,7 +4,7 @@ import android.media.AudioManager;
 import android.util.Log;
 import android.view.View;
 
-import com.soul.lib.test.ButtonTextFragment;
+import com.soul.libs.test.ButtonTextFragment;
 import com.soul.lib.utils.LogUtils;
 import com.soul.lib.utils.NetworkUtils;
 import com.soul.libs.lib.test.B;

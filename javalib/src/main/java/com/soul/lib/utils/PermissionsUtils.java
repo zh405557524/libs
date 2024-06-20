@@ -22,9 +22,13 @@ import androidx.core.content.ContextCompat;
 
 public class PermissionsUtils {
     //申请权限的回调
-    private static final int WRITE_EXTERNAL_STORAGE_REQUEST_CODE = 1;
+    private static final int requestCode = 1;
 
     public static void lacksPermissions(Activity activity, String... permissions) {
+        lacksPermissions(activity, requestCode, permissions);
+    }
+
+    public static void lacksPermissions(Activity activity, int requestCode, String... permissions) {
         ArrayList<String> strings = new ArrayList<>();
         for (String permission : permissions) {
             if (lacksPermission(permission)) {
@@ -33,8 +37,23 @@ public class PermissionsUtils {
         }
         String[] strings1 = new String[strings.size()];
         String[] strings2 = strings.toArray(strings1);
-        openPermissions(activity, strings2);
+        openPermissions(activity, strings2, requestCode);
 
+    }
+
+    /**
+     * 权限是否齐全
+     *
+     * @param permissions 权限
+     * @return true 所有权限齐全； false 有缺陷缺失
+     */
+    public static boolean checkPermissions(String... permissions) {
+        for (String permission : permissions) {
+            if (lacksPermission(permission)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private static boolean lacksPermission(String permission) {
@@ -42,11 +61,9 @@ public class PermissionsUtils {
     }
 
 
-    private static void openPermissions(Activity context, String[] strings) {
+    private static void openPermissions(Activity context, String[] strings, int requestCode) {
         if (strings != null && strings.length > 0) {
-            //申请WRITE_EXTERNAL_STORAGE权限
-            ActivityCompat.requestPermissions(context, strings,
-                    WRITE_EXTERNAL_STORAGE_REQUEST_CODE);
+            ActivityCompat.requestPermissions(context, strings, requestCode);
         }
     }
 

@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import com.soul.lib.test.TestActivity;
+import com.soul.libs.test.TestActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 

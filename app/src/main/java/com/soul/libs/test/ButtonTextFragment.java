@@ -1,4 +1,4 @@
-package com.soul.lib.test;
+package com.soul.libs.test;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -9,11 +9,12 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.soul.lib.R;
 import com.soul.lib.utils.ScreenUtils;
+import com.soul.libs.R;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
 
 
 public abstract class ButtonTextFragment extends Fragment implements IButtonText, IText, IView {

@@ -1,2 +1,4 @@
 include ':app', ':javalib',
 rootProject.name='libs'
+include ':basekotlinui'
+include ':res'

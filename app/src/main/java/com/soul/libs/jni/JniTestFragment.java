@@ -3,7 +3,7 @@ package com.soul.libs.jni;
 import android.util.Log;
 import android.view.View;
 
-import com.soul.lib.test.ButtonTextFragment;
+import com.soul.libs.test.ButtonTextFragment;
 
 /**
  * Description: jni 测试类

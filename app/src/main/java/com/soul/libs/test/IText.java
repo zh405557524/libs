@@ -1,4 +1,4 @@
-package com.soul.lib.test;
+package com.soul.libs.test;
 
 import android.widget.LinearLayout;
 import android.widget.TextView;
