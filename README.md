@@ -1,4 +1,4 @@
-# libs 
+# libs
     常用库封装
 ## 一、lib (javalib)
     常用工具类
@@ -14,6 +14,15 @@
   * 3、蓝牙功能
 
 ## 四、kotlin 下的常用UI组件封装
+    1、Activity
+    2、ViewModule 与LiveData
+# android 功能划分
+ ## 一、UI
+ ## 二、数据存储
+ ## 三、音频与视频
+ ## 四、动画
+ ## 五、权限
+ ## 六、网络
 
 编译指令
  ./gradlew :javalib:assembleRelease

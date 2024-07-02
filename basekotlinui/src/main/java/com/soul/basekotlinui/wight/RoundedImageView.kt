@@ -1,4 +1,4 @@
-package com.soul.lib.wigth
+package com.soul.basekotlinui.wight
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -6,7 +6,7 @@ import android.graphics.Canvas
 import android.graphics.Path
 import android.util.AttributeSet
 import android.widget.ImageView
-import com.soul.lib.R
+import com.soul.basekotlinui.R
 
 /**
  * Description: 带圆角的ImageView
@@ -23,6 +23,7 @@ class RoundedImageView : androidx.appcompat.widget.AppCompatImageView {
     private var leftTopRadius: Int = 0
     private var radius: Int = 8
 
+    val path = Path()
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attributeSet: AttributeSet?) : this(context, attributeSet, 0)
 
@@ -56,7 +57,7 @@ class RoundedImageView : androidx.appcompat.widget.AppCompatImageView {
         val maxBottom = Math.max(leftBottomRadius, rightBottomRadius)
         val minHeight = maxTop + maxBottom
         if (width > minWidth && height > minHeight) {
-            val path = Path()
+
             //四个角：右上，右下，左下，左上
             path.moveTo(leftTopRadius.toFloat(), 0F)
 

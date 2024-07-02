@@ -1,4 +1,4 @@
-package com.qiwu.app.widget
+package com.soul.basekotlinui.wight
 
 import android.annotation.SuppressLint
 import android.content.Context
