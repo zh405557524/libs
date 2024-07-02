@@ -72,6 +72,18 @@ class StateData<T> {
         return code
     }
 
+    fun isSuccess(): Boolean {
+        return status == DataStatus.SUCCESS
+    }
+
+    fun isLoading(): Boolean {
+        return status == DataStatus.LOADING
+    }
+
+    fun isError(): Boolean {
+        return status == DataStatus.ERROR
+    }
+
     enum class DataStatus {
         CREATED, SUCCESS, ERROR, LOADING, COMPLETE
     }

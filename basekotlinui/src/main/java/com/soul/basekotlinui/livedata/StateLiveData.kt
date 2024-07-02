@@ -48,4 +48,9 @@ class StateLiveData<T> : MutableLiveData<StateData<T>>() {
         state = StateData.DataStatus.LOADING
     }
 
+    fun setSuccess(data: T) {
+        state = StateData.DataStatus.SUCCESS
+        value = StateData<T>().success(data)
+    }
+
 }
