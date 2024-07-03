@@ -1,13 +1,8 @@
 package com.soul.lib.module.media;
 
-import android.media.MediaPlayer;
-
 
 import com.soul.lib.utils.LogUtil;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +17,7 @@ import androidx.annotation.NonNull;
  * UpdateDate: 2023/10/19 16:53
  * UpdateRemark:
  */
-public class Player implements IPlayer {
+public class MediaPlayer implements IPlayer {
 
     private static final String TAG = "Player";
     /**
@@ -41,11 +36,11 @@ public class Player implements IPlayer {
      * 准备就绪
      */
     public static final int STATE_READY = 3;
-    private MediaPlayer mMediaPlayer;
+    private android.media.MediaPlayer mMediaPlayer;
 
     private final List<Listener> mListenerList = new ArrayList<>();
 
-    public Player() {
+    public MediaPlayer() {
         mMediaPlayer = initMediaPlayer();
     }
 
@@ -80,13 +75,13 @@ public class Player implements IPlayer {
     public volatile PlayState playState = PlayState.NONE;
 
     @NonNull
-    private MediaPlayer initMediaPlayer() {
+    private android.media.MediaPlayer initMediaPlayer() {
         playState = PlayState.NONE;
-        final MediaPlayer mediaPlayer;
-        mediaPlayer = new MediaPlayer();
-        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+        final android.media.MediaPlayer mediaPlayer;
+        mediaPlayer = new android.media.MediaPlayer();
+        mediaPlayer.setOnCompletionListener(new android.media.MediaPlayer.OnCompletionListener() {
             @Override
-            public void onCompletion(MediaPlayer mediaPlayer) {
+            public void onCompletion(android.media.MediaPlayer mediaPlayer) {
                 if (playState == PlayState.PLAY) {
                     for (Listener listener : mListenerList) {
                         listener.onPlaybackStateChanged(STATE_ENDED);
@@ -94,18 +89,18 @@ public class Player implements IPlayer {
                 }
             }
         });
-        mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+        mediaPlayer.setOnPreparedListener(new android.media.MediaPlayer.OnPreparedListener() {
             @Override
-            public void onPrepared(MediaPlayer mediaPlayer) {
+            public void onPrepared(android.media.MediaPlayer mediaPlayer) {
                 isPrepare = false;
                 for (Listener listener : mListenerList) {
                     listener.onPlaybackStateChanged(STATE_READY);
                 }
             }
         });
-        mediaPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+        mediaPlayer.setOnErrorListener(new android.media.MediaPlayer.OnErrorListener() {
             @Override
-            public boolean onError(MediaPlayer mediaPlayer, int i, int i1) {
+            public boolean onError(android.media.MediaPlayer mediaPlayer, int i, int i1) {
                 LogUtil.i(TAG, "onError 播放出错");
                 mMediaPlayer = initMediaPlayer();
                 for (Listener listener : mListenerList) {

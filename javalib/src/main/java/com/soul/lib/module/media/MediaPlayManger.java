@@ -18,7 +18,7 @@ import java.util.List;
  * UpdateDate: 2023/10/30 14:09
  * UpdateRemark:
  */
-public class PlayManger {
+public class MediaPlayManger {
 
 
     private static final String TAG = "PlayManger";
@@ -82,12 +82,12 @@ public class PlayManger {
 
     }
 
-    public static PlayManger getInstance() {
+    public static MediaPlayManger getInstance() {
         return PlayMangerHolder.INSTANCE;
     }
 
-    public PlayManger() {
-        mPlayer = new Player();
+    public MediaPlayManger() {
+        mPlayer = new MediaPlayer();
         mMainHandler = new Handler(Looper.getMainLooper());
         HandlerThread playTask = new HandlerThread("playTask");
         playTask.start();
@@ -98,7 +98,7 @@ public class PlayManger {
 
 
     public static class PlayMangerHolder {
-        private static final PlayManger INSTANCE = new PlayManger();
+        private static final MediaPlayManger INSTANCE = new MediaPlayManger();
     }
 
     public long getDuration() {
@@ -119,12 +119,12 @@ public class PlayManger {
             public void onPlaybackStateChanged(int playbackState) {
                 LogUtil.i(TAG, "playbackState：" + playbackState);
                 switch (playbackState) {
-                    case Player.STATE_BUFFERING://缓冲中
+                    case MediaPlayer.STATE_BUFFERING://缓冲中
                         LogUtil.i(TAG, "缓冲中");
                         mPlayState = PlayState.BUFFING;
                         mMainHandler.postDelayed(outTimeTask, 5 * 1000);
                         break;
-                    case Player.STATE_READY://准备好
+                    case MediaPlayer.STATE_READY://准备好
                         LogUtil.i(TAG, "准备好");
                         if (mPlayState != PlayState.STOP) {
                             mPlayState = PlayState.PLAYING;
@@ -133,7 +133,7 @@ public class PlayManger {
                         }
 
                         break;
-                    case Player.STATE_ENDED://播放完毕
+                    case MediaPlayer.STATE_ENDED://播放完毕
                         LogUtil.i(TAG, "播放完毕：mPlayState:" + mPlayState);
                         try {
                             mPlayState = PlayState.COMPLETE;
@@ -143,7 +143,7 @@ public class PlayManger {
                             e.printStackTrace();
                         }
                         break;
-                    case Player.STATE_IDLE://空闲中
+                    case MediaPlayer.STATE_IDLE://空闲中
                         LogUtil.i(TAG, "空闲中");
                         break;
                 }
