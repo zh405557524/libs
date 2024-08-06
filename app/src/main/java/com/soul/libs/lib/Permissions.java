@@ -38,6 +38,10 @@ public class Permissions extends ButtonTextFragment implements View.OnClickListe
                 boolean checkPermissions = PermissionsUtils.checkPermissions(Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO);
                 LogUtil.i(TAG, "checkPermissions:" + checkPermissions);
                 break;
+            case "申请权限":
+                String[] permissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO};
+                PermissionsUtils.lacksPermissions(getActivity(), 100, permissions);
+                break;
         }
     }
 }

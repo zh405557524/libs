@@ -2,3 +2,7 @@ include ':app', ':javalib',
 rootProject.name='libs'
 include ':basekotlinui'
 include ':res'
+include ':http'
+include ':image'
+include ':download'
+include ':common'

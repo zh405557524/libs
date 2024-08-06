@@ -81,6 +81,16 @@ public class AppTestFragment extends ButtonTextFragment implements View.OnClickL
                     e.printStackTrace();
                 }
                 break;
+            case "获取App包名":
+                String packageName = AppUtils.getAppPackageName(getContext());
+                LogUtils.i("Tag", "packageName:" + packageName);
+                break;
+            case "获取App具体设置":
+                AppUtils.getAppDetailsSettings(getContext());
+                break;
+            case "安装App":
+                AppUtils.installApp(getContext(), "com.soul.libs");//todo 路径
+                break;
         }
     }
 }

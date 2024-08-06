@@ -14,6 +14,7 @@ import android.os.HandlerThread;
 
 import com.soul.lib.module.log.LogManger;
 import com.soul.lib.utils.LogUtil;
+import com.soul.lib.utils.Utils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -51,6 +52,7 @@ public class Global {
         LogManger.getInstance().setConfig(isDebug);
         LogManger.getInstance().init();
         CrashHandler.getInstance().init(context);
+        Utils.init(context);
     }
 
     public static void init(Application context, Handler handler, Handler bgHandler, int mainThreadId) {
@@ -61,6 +63,7 @@ public class Global {
         HandlerThread heavilyThread = new HandlerThread("task_heavily");
         heavilyThread.start();
         sHeavilyHandler = new Handler(heavilyThread.getLooper());
+        Utils.init(context);
     }
 
     public static void setApplication(Application application) {
