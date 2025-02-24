@@ -29,6 +29,7 @@ public interface IPlayer {
     long getCurrentPosition();
 
     long getDuration();
+     void setVolume(float v, float v1);
 
 
 }

@@ -1,6 +1,7 @@
 package com.soul.lib.module.recorder;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.media.AudioFormat;
 import android.media.AudioManager;
@@ -96,7 +97,7 @@ public class AudioRecorder {
         }
 
         Boolean available = true;
-        AudioRecord recorder =
+        @SuppressLint("MissingPermission") AudioRecord recorder =
                 new AudioRecord(MediaRecorder.AudioSource.MIC, 44100,
                         AudioFormat.CHANNEL_IN_MONO,
                         AudioFormat.ENCODING_DEFAULT, 44100);
@@ -126,6 +127,7 @@ public class AudioRecorder {
      * @param channelConfig  声道
      * @param audioFormat    编码
      */
+    @SuppressLint("MissingPermission")
     public void createAudio(String fileName, int audioSource, int sampleRateInHz, int channelConfig, int audioFormat) {
         if (ContextCompat.checkSelfPermission(Global.getContext(), Manifest.permission.RECORD_AUDIO)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -143,6 +145,7 @@ public class AudioRecorder {
      *
      * @param fileName 文件名
      */
+    @SuppressLint("MissingPermission")
     public void createDefaultAudio(String fileName) {
         if (ContextCompat.checkSelfPermission(Global.getContext(), Manifest.permission.RECORD_AUDIO)
                 != PackageManager.PERMISSION_GRANTED) {

@@ -38,10 +38,37 @@ android {
     android.libraryVariants.configureEach { variant ->
         variant.outputs.all {
 
-            def fileName = SDK_BASENAME +"_"+ name + "_" + defaultConfig.versionName + ".aar"
+            def fileName = SDK_BASENAME + "_" + name + "_" + defaultConfig.versionName + ".aar"
             outputFileName = fileName
         }
     }
+
+
+    def sdkDestinationPath = "../out/libs/"
+    def zipFile = file("$buildDir/tmp/kotlin-classes/release/")
+    def date = new Date()
+    def formattedDate = date.format('yyyyMMdd')
+    task deleteBuild(type: Delete) {
+        delete sdkDestinationPath + SDK_BASENAME + ".jar"
+    }
+    task makeJar(type: Jar) {
+        // 指定输出目录
+        destinationDirectory = file("$buildDir/libs")
+
+        // 包含 Kotlin 和 Java 编译后的类文件
+        from("$buildDir/tmp/kotlin-classes/release/")
+
+        // 包含资源文件
+        include('**/*.class')
+        include('**/*.properties') // 如果有额外的资源文件
+        // 自定义 JAR 文件名称
+        archiveBaseName =SDK_BASENAME // 自定义文件名的基础部分
+        archiveVersion = defaultConfig.versionName // 使用模块的版本号
+
+
+    }
+    makeJar.dependsOn(deleteBuild, build)
+
 }
 
 dependencies {

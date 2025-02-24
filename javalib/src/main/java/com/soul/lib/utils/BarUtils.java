@@ -1,5 +1,6 @@
 package com.soul.lib.utils;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
@@ -710,7 +711,7 @@ public class BarUtils {
      */
     private static void invokePanels(Context context, String methodName) {
         try {
-            Object service = context.getSystemService("statusbar");
+            @SuppressLint("WrongConstant") Object service = context.getSystemService("statusbar");
             Class<?> statusBarManager = Class.forName("android.app.StatusBarManager");
             Method expand = statusBarManager.getMethod(methodName);
             expand.invoke(service);

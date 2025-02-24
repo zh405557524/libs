@@ -4,6 +4,7 @@ package com.soul.lib.module.bluetooth;//
 //
 
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.view.View;
 import android.view.View.MeasureSpec;
@@ -129,6 +130,7 @@ public class ByteUtil {
         return (char)Integer.parseInt(inHex, 16);
     }
 
+    @SuppressLint("WrongConstant")
     public static Bitmap convertViewToBitmap(View view) {
         view.measure(MeasureSpec.makeMeasureSpec(0, 0), MeasureSpec.makeMeasureSpec(0, 0));
         view.layout(0, 0, view.getMeasuredWidth(), view.getMeasuredHeight());

@@ -1,10 +1,12 @@
 package com.soul.lib.utils;
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraManager;
+import android.os.Build;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Process;
@@ -13,6 +15,8 @@ import android.util.Log;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+
+import androidx.annotation.RequiresApi;
 
 /**
  * <pre>
@@ -44,6 +48,7 @@ public class FlashlightController {
     private final String mCameraId;
     private boolean mTorchAvailable;
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public FlashlightController(Context mContext) {
         mCameraManager = (CameraManager) mContext.getSystemService(Context.CAMERA_SERVICE);
 
@@ -63,6 +68,7 @@ public class FlashlightController {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public void setFlashlight(boolean enabled) {
         boolean pendingError = false;
         synchronized (this) {
@@ -175,6 +181,7 @@ public class FlashlightController {
         }
     }
 
+    @SuppressLint("NewApi")
     private final CameraManager.TorchCallback mTorchCallback =
             new CameraManager.TorchCallback() {
 

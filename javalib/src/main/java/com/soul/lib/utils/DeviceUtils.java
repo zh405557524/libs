@@ -97,7 +97,7 @@ public class DeviceUtils {
     @SuppressLint("HardwareIds")
     private static String getMacAddressByWifiInfo() {
         try {
-            WifiManager wifi = (WifiManager) Utils.getContext().getSystemService(Context.WIFI_SERVICE);
+            @SuppressLint("WifiManagerLeak") WifiManager wifi = (WifiManager) Utils.getContext().getSystemService(Context.WIFI_SERVICE);
             if (wifi != null) {
                 WifiInfo info = wifi.getConnectionInfo();
                 if (info != null) return info.getMacAddress();
@@ -214,6 +214,7 @@ public class DeviceUtils {
      *
      * @param reason  传递给内核来请求特殊的引导模式，如"recovery"
      */
+    @SuppressLint("MissingPermission")
     public static void reboot(String reason) {
         PowerManager mPowerManager = (PowerManager) Utils.getContext().getSystemService(Context.POWER_SERVICE);
         try {

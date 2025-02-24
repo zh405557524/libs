@@ -265,5 +265,20 @@ public class MediaPlayManger {
         });
     }
 
+    /**
+     * 设置音量
+     *
+     * @param volume 0~1.0f
+     */
+    public void setVolume(float volume) {
+        mPlayHandler.post(() -> {
+            try {
+                mPlayer.setVolume(volume, volume);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
 
 }

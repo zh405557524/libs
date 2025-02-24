@@ -1,5 +1,6 @@
 package com.soul.lib.module.bluetooth.ble;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -88,6 +89,7 @@ public class BluetoothBleManager implements IBluetoothBleManager {
     /**
      * 打开蓝牙设置
      */
+    @SuppressLint("MissingPermission")
     @Override
     public void openSetting(Activity activity) {
         Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
@@ -103,6 +105,7 @@ public class BluetoothBleManager implements IBluetoothBleManager {
     /**
      * 搜索蓝牙设备
      */
+    @SuppressLint("MissingPermission")
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     @Override
     public void searchDevice() {
@@ -118,6 +121,7 @@ public class BluetoothBleManager implements IBluetoothBleManager {
     /**
      * 连接蓝牙
      */
+    @SuppressLint("MissingPermission")
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     @Override
     public void connect(Context context, BluetoothDevice bluetoothDevice) {
@@ -137,6 +141,7 @@ public class BluetoothBleManager implements IBluetoothBleManager {
 
     }
 
+    @SuppressLint("MissingPermission")
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     @Override
     public void disConnect() {
@@ -201,6 +206,7 @@ public class BluetoothBleManager implements IBluetoothBleManager {
      */
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     private BluetoothAdapter.LeScanCallback mLeScanCallback = new BluetoothAdapter.LeScanCallback() {
+        @SuppressLint("MissingPermission")
         @Override
         public void onLeScan(BluetoothDevice device, int rssi, byte[] scanRecord) {
             do {
@@ -228,6 +234,7 @@ public class BluetoothBleManager implements IBluetoothBleManager {
          * @param status
          * @param newState
          */
+        @SuppressLint("MissingPermission")
         @Override
         public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
             LogUtils.i(TAG, "onConnectionStateChange newState:" + newState);

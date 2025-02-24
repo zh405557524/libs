@@ -33,14 +33,14 @@ class StateData<T> {
         return this
     }
 
-    fun success(@NonNull data: T?): StateData<T> {
+    fun success( data: T?): StateData<T> {
         status = DataStatus.SUCCESS
         this.data = data
         error = null
         return this
     }
 
-    fun error(code: Int, @NonNull error: String?): StateData<T> {
+    fun error(code: Int,  error: String?): StateData<T> {
         status = DataStatus.ERROR
         data = null
         this.code = code

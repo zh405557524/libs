@@ -1,5 +1,6 @@
 package com.soul.lib.utils;
 
+import android.annotation.SuppressLint;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,6 +37,7 @@ public class SnackbarUtils {
      * @param textColor 文本颜色
      * @param bgColor   背景色
      */
+    @SuppressLint("WrongConstant")
     public static void showShortSnackbar(View parent, CharSequence text, @ColorInt int textColor, @ColorInt int bgColor) {
         showSnackbar(parent, text, Snackbar.LENGTH_SHORT, textColor, bgColor, null, -1, null);
     }
@@ -51,6 +53,7 @@ public class SnackbarUtils {
      * @param actionTextColor 事件文本颜色
      * @param listener        监听器
      */
+    @SuppressLint("WrongConstant")
     public static void showShortSnackbar(View parent, CharSequence text, @ColorInt int textColor, @ColorInt int bgColor,
                                          CharSequence actionText, int actionTextColor, View.OnClickListener listener) {
         showSnackbar(parent, text, Snackbar.LENGTH_SHORT, textColor, bgColor,
@@ -65,6 +68,7 @@ public class SnackbarUtils {
      * @param textColor 文本颜色
      * @param bgColor   背景色
      */
+    @SuppressLint("WrongConstant")
     public static void showLongSnackbar(View parent, CharSequence text, @ColorInt int textColor, @ColorInt int bgColor) {
         showSnackbar(parent, text, Snackbar.LENGTH_LONG, textColor, bgColor, null, -1, null);
     }
@@ -80,6 +84,7 @@ public class SnackbarUtils {
      * @param actionTextColor 事件文本颜色
      * @param listener        监听器
      */
+    @SuppressLint("WrongConstant")
     public static void showLongSnackbar(View parent, CharSequence text, @ColorInt int textColor, @ColorInt int bgColor,
                                         CharSequence actionText, int actionTextColor, View.OnClickListener listener) {
         showSnackbar(parent, text, Snackbar.LENGTH_LONG, textColor, bgColor,
@@ -91,10 +96,10 @@ public class SnackbarUtils {
      *
      * @param parent    父视图(CoordinatorLayout或者DecorView)
      * @param text      文本
-     * @param duration  自定义时长
      * @param textColor 文本颜色
      * @param bgColor   背景色
      */
+    @SuppressLint("WrongConstant")
     public static void showIndefiniteSnackbar(View parent, CharSequence text, @ColorInt int textColor, @ColorInt int bgColor) {
         showSnackbar(parent, text, Snackbar.LENGTH_INDEFINITE, textColor, bgColor, null, -1, null);
     }
@@ -104,13 +109,13 @@ public class SnackbarUtils {
      *
      * @param parent          父视图(CoordinatorLayout或者DecorView)
      * @param text            文本
-     * @param duration        自定义时长
      * @param textColor       文本颜色
      * @param bgColor         背景色
      * @param actionText      事件文本
      * @param actionTextColor 事件文本颜色
      * @param listener        监听器
      */
+    @SuppressLint("WrongConstant")
     public static void showIndefiniteSnackbar(View parent, CharSequence text, @ColorInt int textColor, @ColorInt int bgColor,
                                               CharSequence actionText, int actionTextColor, View.OnClickListener listener) {
         showSnackbar(parent, text, Snackbar.LENGTH_INDEFINITE, textColor, bgColor,
@@ -157,7 +162,7 @@ public class SnackbarUtils {
         Snackbar snackbar = snackbarWeakReference.get();
         if (snackbar != null) {
             View view = snackbar.getView();
-            Snackbar.SnackbarLayout layout = (Snackbar.SnackbarLayout) view;
+            @SuppressLint("RestrictedApi") Snackbar.SnackbarLayout layout = (Snackbar.SnackbarLayout) view;
             View child = LayoutInflater.from(view.getContext()).inflate(layoutId, null);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,

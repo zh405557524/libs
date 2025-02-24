@@ -27,6 +27,8 @@
 编译指令
  ./gradlew :javalib:assembleRelease
 
+ ./gradlew :javalib:makeJar
+./gradlew :basekotlinui:makeJar
 
 
 

@@ -1,6 +1,7 @@
 package com.soul.lib.module.net;
 
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -185,7 +186,7 @@ public class NetManager implements INetManager {
                     Context.CONNECTIVITY_SERVICE);
             if (null == manager)
                 return false;
-            NetworkInfo info = manager.getActiveNetworkInfo();
+            @SuppressLint("MissingPermission") NetworkInfo info = manager.getActiveNetworkInfo();
             if (null == info || !info.isAvailable())
                 return false;
             return true;
@@ -212,7 +213,7 @@ public class NetManager implements INetManager {
             String ssid = wifiInfo.getSSID();
             if (ssid != null && ssid.length() > 2) {
                 String ssidTemp = ssid.substring(1, ssid.length() - 1);
-                List<ScanResult> scanResults = wifiManager.getScanResults();
+                @SuppressLint("MissingPermission") List<ScanResult> scanResults = wifiManager.getScanResults();
                 for (ScanResult scanResult : scanResults) {
                     if (scanResult.SSID.equals(ssidTemp)) {
                         freq = scanResult.frequency;
@@ -231,6 +232,7 @@ public class NetManager implements INetManager {
      *
      * @return NetworkInfo
      */
+    @SuppressLint("MissingPermission")
     private static NetworkInfo getActiveNetworkInfo(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context
                 .getSystemService(Context.CONNECTIVITY_SERVICE);

@@ -17,6 +17,8 @@ import com.soul.lib.utils.LogUtil;
 import com.soul.lib.utils.Utils;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -269,6 +271,32 @@ public class Global {
         }
         return versionName;
     }
+
+    /**
+     * 获取文件的MD5值
+     *
+     * @param file 文件
+     * @return MD5值
+     */
+    public static String getFileMD5(File file) throws Exception {
+        MessageDigest digest = MessageDigest.getInstance("MD5");
+        byte[] buffer = new byte[1024];
+        FileInputStream fis = new FileInputStream(file);
+        int bytesRead;
+
+        while ((bytesRead = fis.read(buffer)) != -1) {
+            digest.update(buffer, 0, bytesRead);
+        }
+        fis.close();
+
+        byte[] md5Bytes = digest.digest();
+        StringBuilder sb = new StringBuilder();
+        for (byte b : md5Bytes) {
+            sb.append(String.format("%02x", b));
+        }
+        return sb.toString();
+    }
+
 
     public static String getDeviceSN() {
 

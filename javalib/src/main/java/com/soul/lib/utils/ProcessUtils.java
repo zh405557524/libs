@@ -1,5 +1,6 @@
 package com.soul.lib.utils;
 
+import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.app.AppOpsManager;
 import android.app.usage.UsageStats;
@@ -108,6 +109,7 @@ public class ProcessUtils {
      *
      * @return 被暂时杀死的服务集合
      */
+    @SuppressLint("MissingPermission")
     public static Set<String> killAllBackgroundProcesses() {
         ActivityManager am = (ActivityManager) Utils.getContext().getSystemService(Context.ACTIVITY_SERVICE);
         List<ActivityManager.RunningAppProcessInfo> infos = am.getRunningAppProcesses();
@@ -134,6 +136,7 @@ public class ProcessUtils {
      * @param packageName 包名
      * @return {@code true}: 杀死成功<br>{@code false}: 杀死失败
      */
+    @SuppressLint("MissingPermission")
     public static boolean killBackgroundProcesses(String packageName) {
         if (StringUtils.isSpace(packageName)) return false;
         ActivityManager am = (ActivityManager) Utils.getContext().getSystemService(Context.ACTIVITY_SERVICE);

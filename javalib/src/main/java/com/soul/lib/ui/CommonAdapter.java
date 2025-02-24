@@ -69,6 +69,7 @@ public abstract class CommonAdapter<T> extends RecyclerView.Adapter {
         return parent;
     }
 
+
     @Deprecated
     @Override
     public int getItemCount() {

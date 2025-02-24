@@ -51,7 +51,7 @@ public class PhoneUtils {
      *
      * @return IMIE码
      */
-    @SuppressLint("HardwareIds")
+    @SuppressLint({"HardwareIds", "MissingPermission"})
     public static String getIMEI() {
         TelephonyManager tm = (TelephonyManager) Utils.getContext().getSystemService(Context.TELEPHONY_SERVICE);
         return tm != null ? tm.getDeviceId() : null;
@@ -63,7 +63,7 @@ public class PhoneUtils {
      *
      * @return IMIE码
      */
-    @SuppressLint("HardwareIds")
+    @SuppressLint({"HardwareIds", "MissingPermission"})
     public static String getIMSI() {
         TelephonyManager tm = (TelephonyManager) Utils.getContext().getSystemService(Context.TELEPHONY_SERVICE);
         return tm != null ? tm.getSubscriberId() : null;
@@ -150,6 +150,7 @@ public class PhoneUtils {
      * SubscriberId(IMSI) = 460030419724900<br>
      * VoiceMailNumber = *86<br>
      */
+    @SuppressLint("MissingPermission")
     public static String getPhoneStatus() {
         TelephonyManager tm = (TelephonyManager) Utils.getContext()
                 .getSystemService(Context.TELEPHONY_SERVICE);
@@ -213,7 +214,7 @@ public class PhoneUtils {
      */
     public static void sendSmsSilent(String phoneNumber, String content) {
         if (StringUtils.isEmpty(content)) return;
-        PendingIntent sentIntent = PendingIntent.getBroadcast(Utils.getContext(), 0, new Intent(), 0);
+        @SuppressLint("UnspecifiedImmutableFlag") PendingIntent sentIntent = PendingIntent.getBroadcast(Utils.getContext(), 0, new Intent(), 0);
         SmsManager smsManager = SmsManager.getDefault();
         if (content.length() >= 70) {
             List<String> ms = smsManager.divideMessage(content);

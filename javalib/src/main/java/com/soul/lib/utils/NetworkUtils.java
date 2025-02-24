@@ -1,5 +1,6 @@
 package com.soul.lib.utils;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -60,6 +61,7 @@ public class NetworkUtils {
      *
      * @return NetworkInfo
      */
+    @SuppressLint("MissingPermission")
     private static NetworkInfo getActiveNetworkInfo() {
         ConnectivityManager cm = (ConnectivityManager) Utils.getContext()
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -149,7 +151,7 @@ public class NetworkUtils {
      * @return {@code true}: 是<br>{@code false}: 否
      */
     public static boolean getWifiEnabled() {
-        WifiManager wifiManager = (WifiManager) Utils.getContext().getSystemService(Context.WIFI_SERVICE);
+        @SuppressLint("WifiManagerLeak") WifiManager wifiManager = (WifiManager) Utils.getContext().getSystemService(Context.WIFI_SERVICE);
         return wifiManager.isWifiEnabled();
     }
 
@@ -160,7 +162,7 @@ public class NetworkUtils {
      * @param enabled {@code true}: 打开<br>{@code false}: 关闭
      */
     public static void setWifiEnabled( boolean enabled) {
-        WifiManager wifiManager = (WifiManager)Utils.getContext().getSystemService(Context.WIFI_SERVICE);
+        @SuppressLint("WifiManagerLeak") WifiManager wifiManager = (WifiManager)Utils.getContext().getSystemService(Context.WIFI_SERVICE);
         if (enabled) {
             if (!wifiManager.isWifiEnabled()) {
                 wifiManager.setWifiEnabled(true);
@@ -178,6 +180,7 @@ public class NetworkUtils {
      *
      * @return {@code true}: 连接<br>{@code false}: 未连接
      */
+    @SuppressLint("MissingPermission")
     public static boolean isWifiConnected() {
         ConnectivityManager cm = (ConnectivityManager) Utils.getContext()
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -357,7 +360,7 @@ public class NetworkUtils {
                 Context.CONNECTIVITY_SERVICE);
         if (null == manager)
             return false;
-        NetworkInfo info = manager.getActiveNetworkInfo();
+        @SuppressLint("MissingPermission") NetworkInfo info = manager.getActiveNetworkInfo();
         if (null == info || !info.isAvailable())
             return false;
         return true;

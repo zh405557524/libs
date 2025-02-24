@@ -80,6 +80,7 @@ public class BluetoothProcessorManager implements BluetoothBleConnectManager.OnB
      *
      * @param device
      */
+    @SuppressLint("MissingPermission")
     @Override
     public void onScanDevice(BluetoothDevice device) {
         if (isConnectClassicBT(device.getAddress()) && matchBleAddress(device)) {//蓝牙设备匹配成功，则进行连接
@@ -116,6 +117,7 @@ public class BluetoothProcessorManager implements BluetoothBleConnectManager.OnB
     /**
      * 发送ble认证
      */
+    @SuppressLint("MissingPermission")
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     private void sendCertification() {
         this.mToken[0] = (new Random()).nextInt(99);
@@ -210,6 +212,7 @@ public class BluetoothProcessorManager implements BluetoothBleConnectManager.OnB
                     LogUtils.i(TAG, "sendToDevice uuid:" + characteristic.getUuid());
                     LogUtils.i(TAG, "sendToDevice data:" + Arrays.toString(protocol));
                     mHandler.postDelayed(new Runnable() {
+                        @SuppressLint("MissingPermission")
                         public void run() {
                             if (mBluetoothGatt != null) {
                                 mBluetoothGatt.writeCharacteristic(characteristic);
@@ -242,6 +245,7 @@ public class BluetoothProcessorManager implements BluetoothBleConnectManager.OnB
     /**
      * 匹配ble蓝牙耳机地址
      */
+    @SuppressLint("MissingPermission")
     private boolean matchBleAddress(BluetoothDevice device) {
         String[] ad1 = device.getAddress().split(":");
         String[] ad2 = device.getAddress().split(":");
@@ -259,6 +263,7 @@ public class BluetoothProcessorManager implements BluetoothBleConnectManager.OnB
      * @param macAddress 设备mac地址,例如"78:02:B7:01:01:16"
      * @return
      */
+    @SuppressLint("MissingPermission")
     public static boolean isConnectClassicBT(String macAddress) {
         if (TextUtils.isEmpty(macAddress)) {
             return false;
@@ -273,7 +278,7 @@ public class BluetoothProcessorManager implements BluetoothBleConnectManager.OnB
             int state = (int) method.invoke(bluetoothAdapter, (Object[]) null);
             if (state == BluetoothAdapter.STATE_CONNECTED) {
                 Log.d("test", "BluetoothAdapter.STATE_CONNECTED");
-                Set<BluetoothDevice> devices = bluetoothAdapter.getBondedDevices();
+                @SuppressLint("MissingPermission") Set<BluetoothDevice> devices = bluetoothAdapter.getBondedDevices();
                 Log.d("test", "devices:" + devices.size());
                 for (BluetoothDevice device : devices) {
                     Method isConnectedMethod = BluetoothDevice.class.getDeclaredMethod("isConnected", (Class[]) null);
@@ -399,6 +404,7 @@ public class BluetoothProcessorManager implements BluetoothBleConnectManager.OnB
         return protocol;
     }
 
+    @SuppressLint("MissingPermission")
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     private void handlerBlueConnectMessage(byte[] data) {
         int[] iData = ByteUtil.bytesToDec(data);
