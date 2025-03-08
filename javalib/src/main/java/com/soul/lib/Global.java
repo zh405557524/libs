@@ -1,16 +1,27 @@
 package com.soul.lib;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Application;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.provider.Settings;
+import android.util.TypedValue;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import com.soul.lib.module.log.LogManger;
 import com.soul.lib.utils.LogUtil;
@@ -361,7 +372,157 @@ public class Global {
         return UUID.randomUUID().toString();
     }
 
+    /**
+     * 退出应用
+     */
     public static void exitAPP() {
         System.exit(0);
+    }
+
+
+    /**
+     * dp 转 px
+     */
+    public static int dpToPx(int dp) {
+        return (int) TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP, dp, getResources().getDisplayMetrics());
+    }
+
+    /**
+     * px 转 dp
+     */
+    public static int pxToDp(int px) {
+        return (int) (px / getResources().getDisplayMetrics().density);
+    }
+
+    /**
+     * 获取屏幕宽度（px）
+     */
+    public static int getScreenWidth() {
+        return getResources().getDisplayMetrics().widthPixels;
+    }
+
+    /**
+     * 获取屏幕高度（px）
+     */
+    public static int getScreenHeight() {
+        return getResources().getDisplayMetrics().heightPixels;
+    }
+
+    /**
+     * 检查网络是否可用
+     */
+    public static boolean isNetworkAvailable() {
+        ConnectivityManager cm = (ConnectivityManager)
+                getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (cm != null) {
+            @SuppressLint("MissingPermission") NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+            return networkInfo != null && networkInfo.isConnected();
+        }
+        return false;
+    }
+
+    /**
+     * 获取设备型号
+     */
+    public static String getDeviceModel() {
+        return android.os.Build.MODEL;
+    }
+
+    /**
+     * 获取设备厂商
+     */
+    public static String getManufacturer() {
+        return android.os.Build.MANUFACTURER;
+    }
+
+    /**
+     * 获取 Android 设备 ID
+     */
+    @SuppressLint("HardwareIds")
+    public static String getAndroidId() {
+        return Settings.Secure.getString(
+                getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+    }
+
+    /**
+     * 判断某个服务是否正在运行
+     */
+    public static boolean isServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager)
+                getContext().getSystemService(Context.ACTIVITY_SERVICE);
+        if (manager != null) {
+            List<ActivityManager.RunningServiceInfo> services =
+                    manager.getRunningServices(Integer.MAX_VALUE);
+            for (ActivityManager.RunningServiceInfo service : services) {
+                if (serviceClass.getName().equals(service.service.getClassName())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 复制文本到剪贴板
+     */
+    public static void copyToClipboard(String text) {
+        ClipboardManager clipboard = (ClipboardManager)
+                getContext().getSystemService(Context.CLIPBOARD_SERVICE);
+        if (clipboard != null) {
+            ClipData clip = ClipData.newPlainText("label", text);
+            clipboard.setPrimaryClip(clip);
+        }
+    }
+
+    /**
+     * 隐藏软键盘
+     */
+    public static void hideKeyboard(Activity activity) {
+        if (activity != null && activity.getCurrentFocus() != null) {
+            InputMethodManager imm = (InputMethodManager)
+                    getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (imm != null) {
+                imm.hideSoftInputFromWindow(
+                        activity.getCurrentFocus().getWindowToken(), 0);
+            }
+        }
+    }
+
+    /**
+     * 显示软键盘
+     */
+    public static void showKeyboard(View view) {
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager)
+                    getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (imm != null) {
+                imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
+            }
+        }
+    }
+
+    /**
+     * 打开当前应用的设置详情页
+     */
+    public static void openAppSettings() {
+        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        Uri uri = Uri.fromParts("package", getContext().getPackageName(), null);
+        intent.setData(uri);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        getContext().startActivity(intent);
+    }
+
+    /**
+     * 检查某个包是否已安装
+     */
+    public static boolean isPackageInstalled(String packageName) {
+        PackageManager pm = getContext().getPackageManager();
+        try {
+            pm.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES);
+            return true;
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
     }
 }
